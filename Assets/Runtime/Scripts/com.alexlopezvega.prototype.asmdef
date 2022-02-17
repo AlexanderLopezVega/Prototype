@@ -1,0 +1,14 @@
+{
+    "name": "com.alexlopezvega.prototype",
+    "rootNamespace": "com.alexlopezvega.prototype",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
