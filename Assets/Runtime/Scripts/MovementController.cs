@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
@@ -7,6 +8,7 @@ namespace com.alexlopezvega.prototype
         // Constant Fields
 
         // Fields
+        [SerializeField] private Vector2 moveInput = default;
 
         // Constructors
 
@@ -25,6 +27,14 @@ namespace com.alexlopezvega.prototype
         // Indexers
 
         // Methods
+        private void Start()
+        {
+            InputActionsObserver inputActionsObserver = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver);
+
+            inputActionsObserver.Player.OnMoveActionEvent += OnMoveAction;
+        }
+
+        private void OnMoveAction(CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
 
         // Structs
 
