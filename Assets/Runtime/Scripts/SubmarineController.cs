@@ -10,19 +10,32 @@ namespace com.alexlopezvega.prototype
 
         // Fields
         [Header("Depdendencies")]
+        [SerializeField] private Transform submarineRoot = default;
         [SerializeField] private Rigidbody submarineRigidbody = default;
-        [Header("Data")]
-        [SerializeField, Min(0f)] private float totalNonHullVolume = default;
-        [SerializeField, Min(0f)] private float totalHullEmptyVolume = default;
-        [SerializeField, Min(0f)] private float fillSpeed = 1f;
+        [Header("Throttle")]
+        [SerializeField, Min(0f)] private float speed = default;
+        [SerializeField, Min(0f)] private float throttleRate = default;
+        [SerializeField] private float minThrottle = default;
+        [SerializeField] private float maxThrottle = default;
+        [Header("Throttle")]
+        [SerializeField] private float steerSpeed = default;
+        [SerializeField, Min(0f)] private float steerRate = default;
+        [SerializeField] private float minSteer = default;
+        [SerializeField] private float maxSteer = default;
+        [Header("Throttle")]
+        [SerializeField, Min(0f)] private float ascentSpeed = default;
+        [SerializeField, Min(0f)] private float ascentRate = default;
+        [SerializeField] private float minAscent = default;
+        [SerializeField] private float maxAscent = default;
 
         // Input
         private float throttleInput = default;
         private float steerInput = default;
         private float ascentInput = default;
 
-        // Physics
-        private float fillAmount = 0.5f;
+        private float throttle = default;
+        private float steer = default;
+        private float ascent = default;
 
         // Constructors
 
@@ -63,18 +76,23 @@ namespace com.alexlopezvega.prototype
         {
             float dt = Time.deltaTime;
 
-            fillAmount = Mathf.Clamp01(Mathf.MoveTowards(fillAmount, fillAmount + ascentInput, (fillSpeed / totalHullEmptyVolume) * dt));
+            throttle = Mathf.Clamp(throttle + throttleInput * throttleRate * dt, minThrottle, maxThrottle);
+            steer = Mathf.Clamp(steer + steerInput * steerRate * dt, minSteer, maxSteer);
+            ascent = Mathf.Clamp(ascent + ascentInput * ascentRate * dt, minAscent, maxAscent);
         }
 
         private void FixedUpdate()
         {
-            Vector3 nonHullForce = CalculateBuoyantForce(totalNonHullVolume);
-            Vector3 hullForce = CalculateBuoyantForce((1f - fillAmount) * totalHullEmptyVolume);
+            float dt = Time.fixedDeltaTime;
 
-            submarineRigidbody.AddForce(hullForce + nonHullForce, ForceMode.Force);
+            Vector3 translation = (throttle * speed * submarineRoot.forward + ascent * ascentSpeed * Vector3.up) * dt;
+            Vector3 rotation = steer * steerSpeed * Vector3.up * dt;
+
+            Quaternion rotationQuaternion = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+
+            submarineRigidbody.MovePosition(submarineRigidbody.position + translation);
+            submarineRigidbody.MoveRotation(submarineRigidbody.rotation * rotationQuaternion);
         }
-
-        private static Vector3 CalculateBuoyantForce(float volume) => WaterDensity * volume * -Physics.gravity;
 
         private void OnThrottleAction(CallbackContext context) => throttleInput = context.ReadValue<float>();
         private void OnSteerAction(CallbackContext context) => steerInput = context.ReadValue<float>();
