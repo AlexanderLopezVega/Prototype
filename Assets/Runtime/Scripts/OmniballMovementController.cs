@@ -3,7 +3,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
-    public class MovementController : MonoBehaviour
+    public class OmniballMovementController : MonoBehaviour
     {
         // Constant Fields
 
