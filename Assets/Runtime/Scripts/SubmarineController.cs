@@ -42,8 +42,12 @@ namespace com.alexlopezvega.prototype
         // Finalizers (Destructors)
 
         // Delegates
+        public delegate void OnPositionChangedDelegate(Vector3 previousPosition, Vector3 currentPosition, Vector3 translationMotion);
+        public delegate void OnRotationChangedDelegate(Quaternion previousRotation, Quaternion currentRotation, Quaternion rotationMotion);
 
         // Events
+        public event OnPositionChangedDelegate OnPositionChangedEvent = default;
+        public event OnRotationChangedDelegate OnRotationChangedEvent = default;
 
         // Enums
 
@@ -85,13 +89,19 @@ namespace com.alexlopezvega.prototype
         {
             float dt = Time.fixedDeltaTime;
 
-            Vector3 translation = (throttle * speed * submarineRoot.forward + ascent * ascentSpeed * Vector3.up) * dt;
+            Vector3 translationMotion = (throttle * speed * submarineRoot.forward + ascent * ascentSpeed * Vector3.up) * dt;
             Vector3 rotation = steer * steerSpeed * Vector3.up * dt;
 
-            Quaternion rotationQuaternion = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+            Quaternion rotationMotion = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
 
-            submarineRigidbody.MovePosition(submarineRigidbody.position + translation);
-            submarineRigidbody.MoveRotation(submarineRigidbody.rotation * rotationQuaternion);
+            Vector3 previousPosition = submarineRigidbody.position;
+            Quaternion previousRotation = submarineRigidbody.rotation;
+
+            submarineRigidbody.MovePosition(submarineRigidbody.position + translationMotion);
+            submarineRigidbody.MoveRotation(submarineRigidbody.rotation * rotationMotion);
+
+            OnPositionChangedEvent?.Invoke(previousPosition, submarineRigidbody.position, translationMotion);
+            OnRotationChangedEvent?.Invoke(previousRotation, submarineRigidbody.rotation, rotationMotion);
         }
 
         private void OnThrottleAction(CallbackContext context) => throttleInput = context.ReadValue<float>();
