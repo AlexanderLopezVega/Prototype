@@ -23,6 +23,7 @@ namespace com.alexlopezvega.prototype
 
         // Properties
         public IPlayerEvents Player { get; private set; }
+        public IVehicleEvents Vehicle { get; private set; }
 
         // Indexers
 
@@ -32,9 +33,13 @@ namespace com.alexlopezvega.prototype
             controls = new Controls();
 
             PlayerActionsObserver pao = new PlayerActionsObserver();
+            VehicleActionsObserver vao = new VehicleActionsObserver();
 
             Player = pao;
+            Vehicle = vao;
+
             controls.Player.SetCallbacks(pao);
+            controls.Vehicle.SetCallbacks(vao);
         }
 
         private void OnEnable() => controls.Enable();

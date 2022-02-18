@@ -96,6 +96,140 @@ namespace com.alexlopezvega.prototype
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Vehicle"",
+            ""id"": ""82a1aa65-fb03-4181-b43f-e085014bcb9d"",
+            ""actions"": [
+                {
+                    ""name"": ""Throttle"",
+                    ""type"": ""Value"",
+                    ""id"": ""6f9b4e59-34fb-444f-ad87-6262c746cb0f"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Steering"",
+                    ""type"": ""Value"",
+                    ""id"": ""dcdf1dac-43e1-4be3-af53-f39472bf89af"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ascent"",
+                    ""type"": ""Value"",
+                    ""id"": ""b793a22b-8d48-46b1-9c41-4e1c0778a257"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1018ca64-1cdb-4a90-af8b-4865490c33ba"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""1a9c72ba-7fc2-43af-903d-9f01d3b37a41"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9bdb173b-4ff4-4f26-818b-fe6e136e304a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b93e2757-786b-457d-b714-bc252049797c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steering"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cbdf0c02-b03d-49db-b981-9160d1667a31"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Steering"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""38f818de-c25d-4ff5-85a3-764ab3acc4a8"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Steering"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""2427db44-0713-4181-a811-8c17a1e98702"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ascent"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""df5f2d62-b74d-499c-a4b1-8482a7686c84"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Ascent"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5baf7d0e-c705-43a0-83c1-fe261a60a37c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Ascent"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -120,6 +254,11 @@ namespace com.alexlopezvega.prototype
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            // Vehicle
+            m_Vehicle = asset.FindActionMap("Vehicle", throwIfNotFound: true);
+            m_Vehicle_Throttle = m_Vehicle.FindAction("Throttle", throwIfNotFound: true);
+            m_Vehicle_Steering = m_Vehicle.FindAction("Steering", throwIfNotFound: true);
+            m_Vehicle_Ascent = m_Vehicle.FindAction("Ascent", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -208,6 +347,55 @@ namespace com.alexlopezvega.prototype
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // Vehicle
+        private readonly InputActionMap m_Vehicle;
+        private IVehicleActions m_VehicleActionsCallbackInterface;
+        private readonly InputAction m_Vehicle_Throttle;
+        private readonly InputAction m_Vehicle_Steering;
+        private readonly InputAction m_Vehicle_Ascent;
+        public struct VehicleActions
+        {
+            private @Controls m_Wrapper;
+            public VehicleActions(@Controls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Throttle => m_Wrapper.m_Vehicle_Throttle;
+            public InputAction @Steering => m_Wrapper.m_Vehicle_Steering;
+            public InputAction @Ascent => m_Wrapper.m_Vehicle_Ascent;
+            public InputActionMap Get() { return m_Wrapper.m_Vehicle; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(VehicleActions set) { return set.Get(); }
+            public void SetCallbacks(IVehicleActions instance)
+            {
+                if (m_Wrapper.m_VehicleActionsCallbackInterface != null)
+                {
+                    @Throttle.started -= m_Wrapper.m_VehicleActionsCallbackInterface.OnThrottle;
+                    @Throttle.performed -= m_Wrapper.m_VehicleActionsCallbackInterface.OnThrottle;
+                    @Throttle.canceled -= m_Wrapper.m_VehicleActionsCallbackInterface.OnThrottle;
+                    @Steering.started -= m_Wrapper.m_VehicleActionsCallbackInterface.OnSteering;
+                    @Steering.performed -= m_Wrapper.m_VehicleActionsCallbackInterface.OnSteering;
+                    @Steering.canceled -= m_Wrapper.m_VehicleActionsCallbackInterface.OnSteering;
+                    @Ascent.started -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAscent;
+                    @Ascent.performed -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAscent;
+                    @Ascent.canceled -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAscent;
+                }
+                m_Wrapper.m_VehicleActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Throttle.started += instance.OnThrottle;
+                    @Throttle.performed += instance.OnThrottle;
+                    @Throttle.canceled += instance.OnThrottle;
+                    @Steering.started += instance.OnSteering;
+                    @Steering.performed += instance.OnSteering;
+                    @Steering.canceled += instance.OnSteering;
+                    @Ascent.started += instance.OnAscent;
+                    @Ascent.performed += instance.OnAscent;
+                    @Ascent.canceled += instance.OnAscent;
+                }
+            }
+        }
+        public VehicleActions @Vehicle => new VehicleActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -220,6 +408,12 @@ namespace com.alexlopezvega.prototype
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
+        }
+        public interface IVehicleActions
+        {
+            void OnThrottle(InputAction.CallbackContext context);
+            void OnSteering(InputAction.CallbackContext context);
+            void OnAscent(InputAction.CallbackContext context);
         }
     }
 }

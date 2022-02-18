@@ -39,14 +39,19 @@ namespace com.alexlopezvega.prototype
 
             inputActionsObserver.Player.OnMoveActionEvent += OnMoveAction;
         }
+        private void OnDestroy()
+        {
+            if (AssetFinder.TryFindComponent(TagCts.InputActionsObserver, out InputActionsObserver inputActionsObserver))
+                inputActionsObserver.Player.OnMoveActionEvent -= OnMoveAction;
+        }
 
         private void FixedUpdate()
         {
             Vector3 worldTargetDirection = Vector3.ClampMagnitude(playerRoot.right * moveInput.x + playerRoot.forward * moveInput.y, 1f);
-            
-            if(worldTargetDirection == Vector3.zero)
+
+            if (worldTargetDirection == Vector3.zero)
                 worldTargetDirection = -omniballRigidbody.velocity;
-            
+
             Vector3 worldTorqueDirection = Vector3.Cross(playerRoot.up, worldTargetDirection);
 
             omniballRigidbody.AddTorque(accelerationMagnitude * worldTorqueDirection, ForceMode.Acceleration);

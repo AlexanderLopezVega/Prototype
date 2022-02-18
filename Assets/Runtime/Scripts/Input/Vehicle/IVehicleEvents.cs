@@ -1,10 +1,9 @@
 using System;
-using static com.alexlopezvega.prototype.Controls;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
-    public class PlayerActionsObserver : IPlayerActions, IPlayerEvents
+    public interface IVehicleEvents
     {
         // Constant Fields
 
@@ -17,7 +16,9 @@ namespace com.alexlopezvega.prototype
         // Delegates
 
         // Events
-        public event Action<CallbackContext> OnMoveActionEvent;
+        public event Action<CallbackContext> OnThrottleActionEvent;
+        public event Action<CallbackContext> OnSteerActionEvent;
+        public event Action<CallbackContext> OnAscentActionEvent;
 
         // Enums
 
@@ -28,10 +29,10 @@ namespace com.alexlopezvega.prototype
         // Indexers
 
         // Methods
-        public void OnMove(CallbackContext context) => OnMoveActionEvent?.Invoke(context);
 
         // Structs
 
         // Classes
+
     }
 }
