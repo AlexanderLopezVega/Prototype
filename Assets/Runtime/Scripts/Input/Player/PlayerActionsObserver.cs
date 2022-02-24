@@ -18,11 +18,15 @@ namespace com.alexlopezvega.prototype
 
         // Events
         public event Action<CallbackContext> OnMoveActionEvent;
+        public event Action<CallbackContext> OnJumpActionEvent;
+        public event Action<CallbackContext> OnAscentActionEvent;
 
         // Enums
 
         // Interfaces (interface implementations)
         public void OnMove(CallbackContext context) => OnMoveActionEvent?.Invoke(context);
+        public void OnJump(CallbackContext context) => OnJumpActionEvent?.Invoke(context);
+        public void OnAscent(CallbackContext context) => OnAscentActionEvent?.Invoke(context);
 
         // Properties
 

@@ -37,6 +37,24 @@ namespace com.alexlopezvega.prototype
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8addc00-c052-4ac0-8631-98e66f1d23de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ascent"",
+                    ""type"": ""Value"",
+                    ""id"": ""e5bb075a-29c5-4372-ae11-710250239476"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,50 @@ namespace com.alexlopezvega.prototype
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c686e6cf-23f2-4fbe-b72e-e1ca786dbbeb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5753a9ab-795f-4c56-a99b-8caba33a7ca8"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ascent"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ec9fa14f-9199-4c4f-8aa2-63f5543ecdfe"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Ascent"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""73755c73-c0c1-456d-8782-f2199b6633e4"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Ascent"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -254,6 +316,8 @@ namespace com.alexlopezvega.prototype
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_Ascent = m_Player.FindAction("Ascent", throwIfNotFound: true);
             // Vehicle
             m_Vehicle = asset.FindActionMap("Vehicle", throwIfNotFound: true);
             m_Vehicle_Throttle = m_Vehicle.FindAction("Throttle", throwIfNotFound: true);
@@ -319,11 +383,15 @@ namespace com.alexlopezvega.prototype
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Ascent;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
             public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @Ascent => m_Wrapper.m_Player_Ascent;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -336,6 +404,12 @@ namespace com.alexlopezvega.prototype
                     @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Ascent.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAscent;
+                    @Ascent.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAscent;
+                    @Ascent.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAscent;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -343,6 +417,12 @@ namespace com.alexlopezvega.prototype
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
+                    @Ascent.started += instance.OnAscent;
+                    @Ascent.performed += instance.OnAscent;
+                    @Ascent.canceled += instance.OnAscent;
                 }
             }
         }
@@ -408,6 +488,8 @@ namespace com.alexlopezvega.prototype
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnAscent(InputAction.CallbackContext context);
         }
         public interface IVehicleActions
         {
