@@ -1,21 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.alexlopezvega.prototype
+namespace com.alexlopezvega.prototype.terrain
 {
-    public class TerrainGenerator : MonoBehaviour
+    public class TerrainGenerator
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
-        // Update is called once per frame
-        void Update()
+
+        public void Build()
         {
-        
+
         }
     }
 }
