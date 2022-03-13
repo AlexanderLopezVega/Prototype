@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 1169519024334691808}
   - component: {fileID: 1169519024334691814}
   - component: {fileID: 1169519024334691809}
-  - component: {fileID: 5093333638911571885}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -171,20 +170,6 @@ MonoBehaviour:
   walkSpeed: 2
   runSpeed: 4
   jumpHeight: 1
---- !u!114 &5093333638911571885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169519024334691811}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a51742e10ae1a148a92ac230b02ccb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRoot: {fileID: 1169519024334691808}
-  vehicleRigidbody: {fileID: 0}
 --- !u!1 &1169519024475379089
 GameObject:
   m_ObjectHideFlags: 0
