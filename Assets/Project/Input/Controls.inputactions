@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Ascent",
-                    "type": "Value",
-                    "id": "e5bb075a-29c5-4372-ae11-710250239476",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -99,39 +90,6 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "5753a9ab-795f-4c56-a99b-8caba33a7ca8",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ascent",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "ec9fa14f-9199-4c4f-8aa2-63f5543ecdfe",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Ascent",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "73755c73-c0c1-456d-8782-f2199b6633e4",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Ascent",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },
@@ -158,10 +116,10 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Ascent",
-                    "type": "Value",
+                    "name": "Autorun",
+                    "type": "Button",
                     "id": "b793a22b-8d48-46b1-9c41-4e1c0778a257",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -235,37 +193,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "2427db44-0713-4181-a811-8c17a1e98702",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "91e69449-ea22-4063-9062-07cc8c9e9256",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Ascent",
-                    "isComposite": true,
+                    "groups": "Keyboard&Mouse",
+                    "action": "Autorun",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "df5f2d62-b74d-499c-a4b1-8482a7686c84",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Ascent",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "5baf7d0e-c705-43a0-83c1-fe261a60a37c",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Ascent",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }

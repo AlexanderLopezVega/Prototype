@@ -19,14 +19,14 @@ namespace com.alexlopezvega.prototype
         // Events
         public event Action<CallbackContext> OnThrottleActionEvent;
         public event Action<CallbackContext> OnSteerActionEvent;
-        public event Action<CallbackContext> OnAscentActionEvent;
+        public event Action<CallbackContext> OnAutorunActionEvent;
 
         // Enums
 
         // Interfaces (interface implementations)
         public void OnThrottle(CallbackContext context) => OnThrottleActionEvent?.Invoke(context);
         public void OnSteering(CallbackContext context) => OnSteerActionEvent?.Invoke(context);
-        public void OnAscent(CallbackContext context) => OnAscentActionEvent?.Invoke(context);
+        public void OnAutorun(CallbackContext context) => OnAutorunActionEvent?.Invoke(context);
 
 
         // Properties

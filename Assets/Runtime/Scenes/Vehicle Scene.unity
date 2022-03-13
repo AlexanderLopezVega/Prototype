@@ -186,6 +186,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8676038493044806688, guid: 89e1b941dd1529c4487452e304f9441a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e053f3b319d5964ebc94e9a4c516165, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 89e1b941dd1529c4487452e304f9441a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e053f3b319d5964ebc94e9a4c516165, type: 2}
+    - target: {fileID: -5856564859568878312, guid: 89e1b941dd1529c4487452e304f9441a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e053f3b319d5964ebc94e9a4c516165, type: 2}
+    - target: {fileID: -388301307292060805, guid: 89e1b941dd1529c4487452e304f9441a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e053f3b319d5964ebc94e9a4c516165, type: 2}
+    - target: {fileID: -86737848666493720, guid: 89e1b941dd1529c4487452e304f9441a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e053f3b319d5964ebc94e9a4c516165, type: 2}
     - target: {fileID: 919132149155446097, guid: 89e1b941dd1529c4487452e304f9441a, type: 3}
       propertyPath: m_Name
       value: Graphics
@@ -467,7 +487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359843168}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -564,7 +584,7 @@ Transform:
   m_GameObject: {fileID: 524959782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -794,8 +814,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056855673}
   serializedVersion: 2
-  m_Mass: 5000
-  m_Drag: 0
+  m_Mass: 1000
+  m_Drag: 0.01
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -815,13 +835,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleRoot: {fileID: 2056855674}
-  wheels:
+  vehicleRigidbody: {fileID: 2056855675}
+  motorWheels:
   - {fileID: 165804632}
   - {fileID: 165804631}
   - {fileID: 165804630}
   - {fileID: 165804629}
-  maxReverseWheelMotorTorque: 200
-  maxWheelMotorTorque: 500
-  motorAcceleration: 200
-  maxSteerAngle: 30
-  steerAcceleration: 15
+  steerWheels:
+  - {fileID: 165804632}
+  - {fileID: 165804631}
+  localCentreOfMass: {x: 0, y: -2, z: 0}
+  maxSpeed: 10
+  maxWheelTorque: 300
+  throttleControl:
+    outputMaximum: 1
+    deltaRate: 1
+  steerControl:
+    outputMaximum: 15
+    deltaRate: 15
