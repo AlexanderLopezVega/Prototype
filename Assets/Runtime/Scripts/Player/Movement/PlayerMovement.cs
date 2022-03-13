@@ -57,7 +57,7 @@ namespace com.alexlopezvega.prototype
             Vector3 velocityMotion = velocity * dt;
             Vector3 frameOfReferenceMotion = (frameOfReference != null) ? frameOfReference.GetPointVelocity(playerRoot.position) * dt : Vector3.zero;
 
-            Vector3 combinedMotion = moveMotion + velocityMotion + frameOfReferenceMotion;
+            Vector3 combinedMotion = /*moveMotion +*/ velocityMotion + frameOfReferenceMotion;
 
             characterController.Move(combinedMotion);
         }
