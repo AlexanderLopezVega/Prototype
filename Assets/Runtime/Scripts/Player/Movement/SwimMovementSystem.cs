@@ -68,12 +68,10 @@ namespace com.alexlopezvega.prototype
         public override void SubscribeToEvents(IPlayerEvents playerEvents)
         {
             playerEvents.OnMoveActionEvent += OnMoveAction;
-            playerEvents.OnAscentActionEvent += OnAscentAction;
         }
         public override void UnsubscribeFromEvents(IPlayerEvents playerEvents)
         {
             playerEvents.OnMoveActionEvent -= OnMoveAction;
-            playerEvents.OnAscentActionEvent -= OnAscentAction;
         }
 
         // Structs
