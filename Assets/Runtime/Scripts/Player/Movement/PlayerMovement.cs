@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
@@ -8,109 +9,75 @@ namespace com.alexlopezvega.prototype
 
         // Fields
         [Header("Dependencies")]
+        [SerializeField] private Transform playerRoot = default;
         [SerializeField] private CharacterController characterController = default;
+        [SerializeField] private GroundedHandler groundedHandler = default;
         [Header("Data")]
-        [SerializeField] private MovementSystemTypes defaultMovementSystem = default;
-        [SerializeField] private WalkMovementSystem walkMovementSystem = default;
-        [SerializeField] private SwimMovementSystem swimMovementSystem = default;
+        [SerializeField] private Rigidbody frameOfReference = default;
+        [SerializeField, Min(0f)] private float walkSpeed = default;
+        [SerializeField, Min(0f)] private float runSpeed = default;
+        [SerializeField, Min(0f)] private float jumpHeight = default;
 
-        private MovementSystem activeMovementSystem = default;
+        private Vector2 moveInput = default;
 
-        // Constructors
+        private Vector3 velocity = default;
 
-        // Finalizers (Destructors)
-
-        // Delegates
-
-        // Events
-
-        // Enums
-
-        // Interfaces (interface implementations)
-
-        // Properties
-        private MovementSystem Active
-        {
-            get => activeMovementSystem;
-            set
-            {
-                if (Active == value)
-                    return;
-
-                SetAllEnabled(false);
-
-                activeMovementSystem = value;
-                activeMovementSystem.Enabled = true;
-            }
-        }
-
-        // Indexers
-
-        // Methods
         private void Start()
         {
-            SetDefaultMovementSystem();
-            SubscribeMovementSystemsToPlayerEvents();
-        }
+            IPlayerEvents player = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
 
+            player.OnMoveActionEvent += OnMoveAction;
+            player.OnJumpActionEvent += OnJumpAction;
+        }
         private void OnDestroy()
-        {
-            TryUnsubscribeMovementSystemsFromPlayerEvents();
-        }
-
-        private void Update()
-        {
-
-            activeMovementSystem.OnUpdate(
-                characterController,
-                Time.deltaTime);
-        }
-
-        private void SetAllEnabled(bool state)
-        {
-            walkMovementSystem.Enabled = state;
-            swimMovementSystem.Enabled = state;
-        }
-
-        private void SetDefaultMovementSystem()
-        {
-            switch (defaultMovementSystem)
-            {
-                case MovementSystemTypes.Walk:
-                    Active = walkMovementSystem;
-                    break;
-                case MovementSystemTypes.Swim:
-                    Active = swimMovementSystem;
-                    break;
-            }
-        }
-
-        private void SubscribeMovementSystemsToPlayerEvents()
-        {
-            IPlayerEvents events = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
-
-            walkMovementSystem.SubscribeToEvents(events);
-            swimMovementSystem.SubscribeToEvents(events);
-        }
-
-        private void TryUnsubscribeMovementSystemsFromPlayerEvents()
         {
             if (AssetFinder.TryFindComponent(TagCts.InputActionsObserver, out InputActionsObserver iao))
             {
-                IPlayerEvents events = iao.Player;
+                IPlayerEvents player = iao.Player;
 
-                walkMovementSystem.UnsubscribeFromEvents(events);
-                swimMovementSystem.UnsubscribeFromEvents(events);
+                player.OnMoveActionEvent -= OnMoveAction;
+                player.OnJumpActionEvent -= OnJumpAction;
             }
         }
 
-        // Structs
-
-        // Classes
-        public enum MovementSystemTypes
+        private void FixedUpdate()
         {
-            Walk,
-            Swim
+            velocity += Physics.gravity * Time.fixedDeltaTime;
+
+            if (groundedHandler.IsGrounded)
+                velocity.y = -0.2f; // Default grounded falling speed (should be small but negative to "stick" to the ground)
+        }
+        private void Update()
+        {
+            float dt = Time.deltaTime;
+
+            Vector3 inputDirection = Vector3.ClampMagnitude(playerRoot.right * moveInput.x + playerRoot.forward * moveInput.y, 1f);
+
+            Vector3 moveMotion = dt * walkSpeed * inputDirection;
+            Vector3 velocityMotion = velocity * dt;
+            Vector3 frameOfReferenceMotion = (frameOfReference != null) ? frameOfReference.GetPointVelocity(playerRoot.position) * dt : Vector3.zero;
+
+            Vector3 combinedMotion = moveMotion + velocityMotion + frameOfReferenceMotion;
+
+            characterController.Move(combinedMotion);
+        }
+
+        private void Jump()
+        {
+            velocity.y = Mathf.Sqrt(2f * -Physics.gravity.y * jumpHeight);
+        }
+
+        private void OnMoveAction(CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
+        private void OnJumpAction(CallbackContext ctx)
+        {
+            if (ctx.performed)
+                TryJump();
+        }
+
+        private void TryJump()
+        {
+            if (groundedHandler.IsGrounded)
+                Jump();
         }
     }
 }
