@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace com.alexlopezvega.prototype
 {
-    public class SubmarinePassenger : MonoBehaviour
+    public class VehiclePassenger : MonoBehaviour
     {
         // Constant Fields
 
         // Fields
         [SerializeField] private Transform playerRoot = default;
-        [SerializeField] private Rigidbody submarineRigidbody = default;
+        [SerializeField] private Rigidbody vehicleRigidbody = default;
 
         // Constructors
 
@@ -31,8 +31,8 @@ namespace com.alexlopezvega.prototype
         {
             float dt = Time.fixedDeltaTime;
 
-            playerRoot.position += submarineRigidbody.GetPointVelocity(playerRoot.position) * dt;
-            playerRoot.rotation *= Quaternion.Euler(submarineRigidbody.angularVelocity * Mathf.Rad2Deg * dt);
+            playerRoot.position += vehicleRigidbody.GetPointVelocity(playerRoot.position) * dt;
+            playerRoot.rotation *= Quaternion.Euler(vehicleRigidbody.angularVelocity * Mathf.Rad2Deg * dt);
         }
 
         // Structs

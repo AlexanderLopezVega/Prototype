@@ -46,15 +46,6 @@ namespace com.alexlopezvega.prototype
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Ascent"",
-                    ""type"": ""Value"",
-                    ""id"": ""e5bb075a-29c5-4372-ae11-710250239476"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -123,39 +114,6 @@ namespace com.alexlopezvega.prototype
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""5753a9ab-795f-4c56-a99b-8caba33a7ca8"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ascent"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""ec9fa14f-9199-4c4f-8aa2-63f5543ecdfe"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Ascent"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""73755c73-c0c1-456d-8782-f2199b6633e4"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Ascent"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -182,10 +140,10 @@ namespace com.alexlopezvega.prototype
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Ascent"",
-                    ""type"": ""Value"",
+                    ""name"": ""Autorun"",
+                    ""type"": ""Button"",
                     ""id"": ""b793a22b-8d48-46b1-9c41-4e1c0778a257"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -259,37 +217,15 @@ namespace com.alexlopezvega.prototype
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""2427db44-0713-4181-a811-8c17a1e98702"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""91e69449-ea22-4063-9062-07cc8c9e9256"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ascent"",
-                    ""isComposite"": true,
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Autorun"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""df5f2d62-b74d-499c-a4b1-8482a7686c84"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Ascent"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""5baf7d0e-c705-43a0-83c1-fe261a60a37c"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Ascent"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -317,12 +253,11 @@ namespace com.alexlopezvega.prototype
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-            m_Player_Ascent = m_Player.FindAction("Ascent", throwIfNotFound: true);
             // Vehicle
             m_Vehicle = asset.FindActionMap("Vehicle", throwIfNotFound: true);
             m_Vehicle_Throttle = m_Vehicle.FindAction("Throttle", throwIfNotFound: true);
             m_Vehicle_Steering = m_Vehicle.FindAction("Steering", throwIfNotFound: true);
-            m_Vehicle_Ascent = m_Vehicle.FindAction("Ascent", throwIfNotFound: true);
+            m_Vehicle_Autorun = m_Vehicle.FindAction("Autorun", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -384,14 +319,12 @@ namespace com.alexlopezvega.prototype
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Jump;
-        private readonly InputAction m_Player_Ascent;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
             public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
-            public InputAction @Ascent => m_Wrapper.m_Player_Ascent;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -407,9 +340,6 @@ namespace com.alexlopezvega.prototype
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                    @Ascent.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAscent;
-                    @Ascent.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAscent;
-                    @Ascent.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAscent;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -420,9 +350,6 @@ namespace com.alexlopezvega.prototype
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
-                    @Ascent.started += instance.OnAscent;
-                    @Ascent.performed += instance.OnAscent;
-                    @Ascent.canceled += instance.OnAscent;
                 }
             }
         }
@@ -433,14 +360,14 @@ namespace com.alexlopezvega.prototype
         private IVehicleActions m_VehicleActionsCallbackInterface;
         private readonly InputAction m_Vehicle_Throttle;
         private readonly InputAction m_Vehicle_Steering;
-        private readonly InputAction m_Vehicle_Ascent;
+        private readonly InputAction m_Vehicle_Autorun;
         public struct VehicleActions
         {
             private @Controls m_Wrapper;
             public VehicleActions(@Controls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Throttle => m_Wrapper.m_Vehicle_Throttle;
             public InputAction @Steering => m_Wrapper.m_Vehicle_Steering;
-            public InputAction @Ascent => m_Wrapper.m_Vehicle_Ascent;
+            public InputAction @Autorun => m_Wrapper.m_Vehicle_Autorun;
             public InputActionMap Get() { return m_Wrapper.m_Vehicle; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -456,9 +383,9 @@ namespace com.alexlopezvega.prototype
                     @Steering.started -= m_Wrapper.m_VehicleActionsCallbackInterface.OnSteering;
                     @Steering.performed -= m_Wrapper.m_VehicleActionsCallbackInterface.OnSteering;
                     @Steering.canceled -= m_Wrapper.m_VehicleActionsCallbackInterface.OnSteering;
-                    @Ascent.started -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAscent;
-                    @Ascent.performed -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAscent;
-                    @Ascent.canceled -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAscent;
+                    @Autorun.started -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAutorun;
+                    @Autorun.performed -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAutorun;
+                    @Autorun.canceled -= m_Wrapper.m_VehicleActionsCallbackInterface.OnAutorun;
                 }
                 m_Wrapper.m_VehicleActionsCallbackInterface = instance;
                 if (instance != null)
@@ -469,9 +396,9 @@ namespace com.alexlopezvega.prototype
                     @Steering.started += instance.OnSteering;
                     @Steering.performed += instance.OnSteering;
                     @Steering.canceled += instance.OnSteering;
-                    @Ascent.started += instance.OnAscent;
-                    @Ascent.performed += instance.OnAscent;
-                    @Ascent.canceled += instance.OnAscent;
+                    @Autorun.started += instance.OnAutorun;
+                    @Autorun.performed += instance.OnAutorun;
+                    @Autorun.canceled += instance.OnAutorun;
                 }
             }
         }
@@ -489,13 +416,12 @@ namespace com.alexlopezvega.prototype
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
-            void OnAscent(InputAction.CallbackContext context);
         }
         public interface IVehicleActions
         {
             void OnThrottle(InputAction.CallbackContext context);
             void OnSteering(InputAction.CallbackContext context);
-            void OnAscent(InputAction.CallbackContext context);
+            void OnAutorun(InputAction.CallbackContext context);
         }
     }
 }
