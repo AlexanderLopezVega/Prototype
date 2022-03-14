@@ -1,26 +1,20 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace com.alexlopezvega.prototype.inventory
 {
     public class Inventory
     {
-        private const string PositiveNonZeroAmountMessage = "Amount must be a positive non-zero integer";
+        private readonly Dictionary<Item, uint> inventoryItemMap = default;
+        private readonly uint capacity = default;
 
-        private Dictionary<Item, int> inventoryItemMap = default;
-        private int capacity = default;
-
-        public Inventory(int capacity)
+        public Inventory(uint capacity)
         {
-            inventoryItemMap = new Dictionary<Item, int>();
+            inventoryItemMap = new Dictionary<Item, uint>();
             this.capacity = capacity;
         }
 
-        public bool AddItem(Item item, int amount)
+        public bool AddItem(Item item, uint amount)
         {
-            if (amount < 0)
-                throw new InventoryException(PositiveNonZeroAmountMessage);
-
             if (!inventoryItemMap.ContainsKey(item))
             {
                 if (!HasRemainingCapacity())
@@ -34,26 +28,28 @@ namespace com.alexlopezvega.prototype.inventory
             return true;
         }
 
-        public int RemoveItem(Item item, int amount)
+        public uint RemoveItem(Item item, uint amount)
         {
-            if (amount < 0)
-                throw new InventoryException(PositiveNonZeroAmountMessage);
-
             if (!inventoryItemMap.ContainsKey(item))
-                return -1;
+                return 0;
 
-            int currentAmount = inventoryItemMap[item];
-            int removedAmount = Mathf.Min(amount, currentAmount);
-
-            inventoryItemMap[item] -= removedAmount;
-
-            if (removedAmount == 0)
+            uint currentAmount = inventoryItemMap[item];
+            
+            if(currentAmount <= amount)
+            {
                 inventoryItemMap.Remove(item);
 
-            return removedAmount;
+                return currentAmount;
+            }
+            else
+            {
+                inventoryItemMap[item] -= amount;
+
+                return amount;
+            }
         }
 
-        public int GetAmount(Item item) => !inventoryItemMap.ContainsKey(item) ? 0 : inventoryItemMap[item];
+        public uint GetAmount(Item item) => !inventoryItemMap.ContainsKey(item) ? 0 : inventoryItemMap[item];
 
         private bool HasRemainingCapacity() => inventoryItemMap.Keys.Count < capacity;
     }

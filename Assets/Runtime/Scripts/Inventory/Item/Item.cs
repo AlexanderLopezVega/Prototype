@@ -1,14 +1,12 @@
-using System;
-
 namespace com.alexlopezvega.prototype.inventory
 {
     public abstract class Item
     {
-        public ulong AssetItemID { get; private set; }
+        public ulong ItemID { get; private set; }
 
         protected Item(ulong assetItemID)
         {
-            AssetItemID = assetItemID;
+            ItemID = assetItemID;
         }
     }
 }

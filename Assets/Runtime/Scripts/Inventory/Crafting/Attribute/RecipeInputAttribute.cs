@@ -2,15 +2,16 @@ using System;
 
 namespace com.alexlopezvega.prototype.inventory
 {
+    [AttributeUsage(validOn: AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class RecipeInputAttribute : Attribute
     {
-        private Type ingredient = default;
-        private int amount = default;
+        public ulong ItemID { get; private set; }
+        public uint Amount { get; private set; }
 
-        public RecipeInputAttribute(Type ingredient, int amount)
+        public RecipeInputAttribute(ulong itemID, uint amount)
         {
-            this.ingredient = ingredient;
-            this.amount = amount;
+            ItemID = itemID;
+            Amount = amount;
         }
     }
 }
