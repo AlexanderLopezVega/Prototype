@@ -6,6 +6,9 @@ namespace com.alexlopezvega.prototype
 
         private const string MenuName = "Project Assets";
 
-        public const string Item = MenuName + Delimiter + nameof(Item);
+        private const string Inventory = MenuName + Delimiter + nameof(Inventory);
+
+        public const string Item = Inventory + Delimiter + nameof(Item);
+        public const string Recipe = Inventory + Delimiter + nameof(Recipe);
     }
 }

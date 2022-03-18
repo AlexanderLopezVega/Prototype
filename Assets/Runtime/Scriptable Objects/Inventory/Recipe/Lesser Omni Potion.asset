@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953a551fe7a7210408c3ede0819bbd1f, type: 3}
+  m_Name: Lesser Omni Potion
+  m_EditorClassIdentifier: 
+  <RecipeName>k__BackingField: Lesser Omni Potion
+  inputs:
+  - item: {fileID: 11400000, guid: ca2b338a7f0bf4b42b41787624c790aa, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 8742f6f90cfe2314ab30d90d1f2fa0ec, type: 2}
+    amount: 1
+  outputs:
+  - item: {fileID: 11400000, guid: c8f27b4be2c4a894bace284526d1f06c, type: 2}
+    amount: 2
