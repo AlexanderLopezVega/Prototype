@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace com.alexlopezvega.prototype
 {
     public static class AssetMenuCts
@@ -9,5 +5,7 @@ namespace com.alexlopezvega.prototype
         private const string Delimiter = "/";
 
         private const string MenuName = "Project Assets";
+
+        public const string Item = MenuName + Delimiter + nameof(Item);
     }
 }

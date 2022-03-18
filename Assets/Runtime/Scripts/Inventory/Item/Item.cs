@@ -1,12 +1,10 @@
+using UnityEngine;
+
 namespace com.alexlopezvega.prototype.inventory
 {
-    public abstract class Item
+    [CreateAssetMenu(menuName = AssetMenuCts.Item)]
+    public class Item : ScriptableObject
     {
-        public ulong ItemID { get; private set; }
-
-        protected Item(ulong assetItemID)
-        {
-            ItemID = assetItemID;
-        }
+        [field: SerializeField] public Sprite Sprite { get; private set; }
     }
 }

@@ -1,56 +1,57 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace com.alexlopezvega.prototype.inventory
 {
-    public class Inventory
+    public class Inventory : MonoBehaviour
     {
-        private readonly Dictionary<Item, uint> inventoryItemMap = default;
-        private readonly uint capacity = default;
+        [SerializeField] private uint capacity = default;
 
-        public Inventory(uint capacity)
+        private Dictionary<Item, uint> itemStackSet = default;
+
+        public void Start()
         {
-            inventoryItemMap = new Dictionary<Item, uint>();
-            this.capacity = capacity;
+            itemStackSet = new Dictionary<Item, uint>();
         }
 
         public bool AddItem(Item item, uint amount)
         {
-            if (!inventoryItemMap.ContainsKey(item))
+            if (!itemStackSet.ContainsKey(item))
             {
                 if (!HasRemainingCapacity())
                     return false;
                 else
-                    inventoryItemMap[item] = amount;
+                    itemStackSet[item] = amount;
             }
             else
-                inventoryItemMap[item] += amount;
+                itemStackSet[item] += amount;
 
             return true;
         }
 
         public uint RemoveItem(Item item, uint amount)
         {
-            if (!inventoryItemMap.ContainsKey(item))
+            if (!itemStackSet.ContainsKey(item))
                 return 0;
 
-            uint currentAmount = inventoryItemMap[item];
-            
-            if(currentAmount <= amount)
+            uint currentAmount = itemStackSet[item];
+
+            if (currentAmount <= amount)
             {
-                inventoryItemMap.Remove(item);
+                itemStackSet.Remove(item);
 
                 return currentAmount;
             }
             else
             {
-                inventoryItemMap[item] -= amount;
+                itemStackSet[item] -= amount;
 
                 return amount;
             }
         }
 
-        public uint GetAmount(Item item) => !inventoryItemMap.ContainsKey(item) ? 0 : inventoryItemMap[item];
+        public uint GetAmount(Item item) => !itemStackSet.ContainsKey(item) ? 0 : itemStackSet[item];
 
-        private bool HasRemainingCapacity() => inventoryItemMap.Keys.Count < capacity;
+        private bool HasRemainingCapacity() => itemStackSet.Keys.Count < capacity;
     }
 }
