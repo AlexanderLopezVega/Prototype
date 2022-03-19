@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4fe27dc1171739449a7d2997f742228, type: 3}
-  m_Name: Lesser Health Potion
+  m_Script: {fileID: 11500000, guid: 32d979d777e22c248970273a26c83d87, type: 3}
+  m_Name: Inventory UI Scene Name
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Lesser health potion
-  <Sprite>k__BackingField: {fileID: 21300000, guid: b247ef8a899ae4425b46bad4a10a76b8, type: 3}
+  Value: Inventory UI

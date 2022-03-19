@@ -1,7 +1,7 @@
 namespace com.alexlopezvega.prototype.inventory
 {
     [System.Serializable]
-    public struct ItemStack
+    public class ItemStack
     {
         public Item item;
         public uint amount;
