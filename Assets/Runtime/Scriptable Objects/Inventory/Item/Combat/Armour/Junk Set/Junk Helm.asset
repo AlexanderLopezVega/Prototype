@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4fe27dc1171739449a7d2997f742228, type: 3}
-  m_Name: Lesser Omni Potion
+  m_Name: Junk Helm
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Lesser omni potion
-  <Sprite>k__BackingField: {fileID: 21300000, guid: b16cbe6e226bd4dc981f998f1067d7a9, type: 3}
+  <Name>k__BackingField: Junk Helm
+  <Sprite>k__BackingField: {fileID: 21300000, guid: ed21a03f7c26b194f9224784ee60ce79, type: 3}

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fe27dc1171739449a7d2997f742228, type: 3}
+  m_Name: Junk Tasset
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Junk Tasset
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 5e8259166f135804d82764044baa1d66, type: 3}

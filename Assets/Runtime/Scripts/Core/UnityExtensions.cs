@@ -14,7 +14,7 @@ namespace com.alexlopezvega.prototype
         public static void Clear(this Transform transform)
         {
             foreach (Transform child in transform)
-                Object.Destroy(child);
+                Object.Destroy(child.gameObject);
         }
     }
 }

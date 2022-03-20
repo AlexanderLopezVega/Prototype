@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 953a551fe7a7210408c3ede0819bbd1f, type: 3}
-  m_Name: Lesser Omni Potion
+  m_Name: Junk Tasset Recipe
   m_EditorClassIdentifier: 
-  <RecipeName>k__BackingField: Lesser Omni Potion
-  inputs:
-  - item: {fileID: 11400000, guid: ca2b338a7f0bf4b42b41787624c790aa, type: 2}
+  <Inputs>k__BackingField:
+  - item: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+    amount: 7
+  <Output>k__BackingField:
+    item: {fileID: 11400000, guid: d0a08f5846fbae640b3194caa2d364ab, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 8742f6f90cfe2314ab30d90d1f2fa0ec, type: 2}
-    amount: 1
-  outputs:
-  - item: {fileID: 11400000, guid: c8f27b4be2c4a894bace284526d1f06c, type: 2}
-    amount: 2

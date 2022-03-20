@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4fe27dc1171739449a7d2997f742228, type: 3}
-  m_Name: Lesser Mana Potion
+  m_Name: Scrap Metal
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Lesser mana potion
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 77f099b5da1e44e4d986b23eae4db4dd, type: 3}
+  <Name>k__BackingField: Scrap Metal
+  <Sprite>k__BackingField: {fileID: 21300000, guid: b1e067c11ccf0314d98df94f6ecdf46d, type: 3}

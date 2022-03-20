@@ -44,7 +44,12 @@ namespace com.alexlopezvega.prototype.ui
             if (eventData.pointerDrag == null || eventData.pointerDrag == gameObject)
                 return;
 
-            eventData.pointerDrag.GetComponent<ItemSlot>().SwapItem(this);
+            ItemSlot itemSlot = eventData.pointerDrag.GetComponent<ItemSlot>();
+
+            if (itemSlot.Item == null)
+                return;
+
+            itemSlot.SwapItem(this);
         }
 
         private void SwapItem(ItemSlot newItemSlot)

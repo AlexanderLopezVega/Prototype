@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5d5c60fe5093457ae0619c5790cb3e7c0d7e3bcb"
+      "hash": "d5b8ea56b3ed3696d960d24495880c2cb1cf4857"
     },
     "com.alexlopezvega.scriptable-object-data": {
       "version": "https://github.com/AlexanderLopezVega/ScriptableObjectData.git",

@@ -9,6 +9,8 @@ namespace com.alexlopezvega.prototype.ui
         [SerializeField] private RectTransform dragRoot = default;
         [SerializeField] private Image dragImage = default;
         [SerializeField] private CanvasGroup canvasGroup = default;
+        [Header("Data")]
+        [SerializeField] private float dragAlpha = 0.6f;
 
         public Sprite Sprite
         {
@@ -30,7 +32,7 @@ namespace com.alexlopezvega.prototype.ui
         private void SetVisible(bool isVisible)
         {
 
-            canvasGroup.alpha = (isVisible) ? 0.6f : 0f;
+            canvasGroup.alpha = (isVisible) ? dragAlpha : 0f;
         }
     }
 }

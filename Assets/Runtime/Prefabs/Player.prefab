@@ -110,9 +110,10 @@ GameObject:
   - component: {fileID: 1169519024334691814}
   - component: {fileID: 1169519024334691809}
   - component: {fileID: 5093333638911571885}
+  - component: {fileID: 1390508030715552954}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,7 +185,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRoot: {fileID: 1169519024334691808}
-  submarineRigidbody: {fileID: 0}
+  vehicleRigidbody: {fileID: 0}
+--- !u!114 &1390508030715552954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169519024334691811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85b70b71925cd840914667ee96acef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 15
+  items:
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+  - {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
 --- !u!1 &1169519024475379089
 GameObject:
   m_ObjectHideFlags: 0

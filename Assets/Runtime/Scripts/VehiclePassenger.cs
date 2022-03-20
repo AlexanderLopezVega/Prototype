@@ -29,10 +29,13 @@ namespace com.alexlopezvega.prototype
         // Methods
         public void FixedUpdate()
         {
+            if (vehicleRigidbody == null)
+                return;
+
             float dt = Time.fixedDeltaTime;
 
             playerRoot.position += vehicleRigidbody.GetPointVelocity(playerRoot.position) * dt;
-            playerRoot.rotation *= Quaternion.Euler(vehicleRigidbody.angularVelocity * Mathf.Rad2Deg * dt);
+            playerRoot.rotation *= Quaternion.Euler(dt * Mathf.Rad2Deg * vehicleRigidbody.angularVelocity);
         }
 
         // Structs

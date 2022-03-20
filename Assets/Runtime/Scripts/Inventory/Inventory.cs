@@ -1,3 +1,4 @@
+using com.alexlopezvega.prototype.ui;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,8 @@ namespace com.alexlopezvega.prototype.inventory
             return true;
         }
 
+        public bool AddItem(ItemStack itemStack) => AddItem(itemStack.item, itemStack.amount);
+
         public uint RemoveItem(Item item, uint amount)
         {
             if (!itemStackSet.ContainsKey(item))
@@ -70,7 +73,12 @@ namespace com.alexlopezvega.prototype.inventory
             return previousAmount - currentAmount;
         }
 
+        public uint RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.item, itemStack.amount);
+
         public ItemStack GetStack(Item item) => !itemStackSet.ContainsKey(item) ? default : itemStackSet[item];
+
+        public bool HasEnough(Item item, uint amount) => itemStackSet.ContainsKey(item) && itemStackSet[item].amount >= amount;
+        public bool HasEnough(ItemStack itemStack) => HasEnough(itemStack.item, itemStack.amount);
 
         private bool HasRemainingCapacity() => itemStackSet.Keys.Count < capacity;
 
