@@ -20,6 +20,7 @@ namespace com.alexlopezvega.prototype
         public event Action<CallbackContext> OnMoveActionEvent;
         public event Action<CallbackContext> OnJumpActionEvent;
         public event Action<CallbackContext> OnLookActionEvent;
+        public event Action<CallbackContext> OnInteractActionEvent;
 
         // Enums
 
@@ -27,6 +28,7 @@ namespace com.alexlopezvega.prototype
         public void OnMove(CallbackContext context) => OnMoveActionEvent?.Invoke(context);
         public void OnJump(CallbackContext context) => OnJumpActionEvent?.Invoke(context);
         public void OnLook(CallbackContext context) => OnLookActionEvent?.Invoke(context);
+        public void OnInteract(CallbackContext context) => OnInteractActionEvent?.Invoke(context);
 
         // Properties
 

@@ -30,7 +30,7 @@ namespace com.alexlopezvega.prototype.inventory
 
             currentWeight += item.Weight * amount;
 
-            NotifyObservers(observer => observer.OnItemAdded(item, previousAmount, 0));
+            NotifyObservers(observer => observer.OnItemAdded(item, previousAmount, currentAmount));
         }
 
         public void AddItem(ItemStack itemStack) => AddItem(itemStack.Item, itemStack.Amount);

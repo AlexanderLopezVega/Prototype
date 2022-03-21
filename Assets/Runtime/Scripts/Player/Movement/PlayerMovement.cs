@@ -1,57 +1,49 @@
+using Multiscene.Runtime;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IBootListener
     {
-        // Constant Fields
+        private const float GroundedFallSpeed = -0.2f;
 
-        // Fields
         [Header("Dependencies")]
         [SerializeField] private Transform root = default;
         [SerializeField] private CharacterController characterController = default;
         [SerializeField] private GroundedHandler groundedHandler = default;
         [Header("Data")]
-        [SerializeField] private float speed = default;
+        [SerializeField, Min(0f)] private float speed = default;
+        [SerializeField, Min(0f)] private float jumpHeight = default;
 
         private Vector2 moveInput = default;
-        private bool jumpInput = default;
 
         private Vector3 velocity = default;
+        private bool queueJump = default;
 
-        // Constructors
-
-        private void Start()
+        void IBootListener.OnSceneCollectionLoaded()
         {
-            IPlayerEvents player = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
+            IPlayerEvents playerEvents = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
 
-        // Delegates
-
-        // Events
-
-        // Enums
-
-        // Interfaces (interface implementations)
-
-        // Properties
-
-        // Indexers
-
-        // Methods
-        private void Start()
+            playerEvents.OnMoveActionEvent += OnMove;
+            playerEvents.OnJumpActionEvent += OnJump;
+        }
+        private void OnDestroy()
         {
-            SubscribeMovementSystemsToPlayerEvents();
+            if (!AssetFinder.TryFindComponent(TagCts.InputActionsObserver, out InputActionsObserver iao))
+                return;
+
+            IPlayerEvents playerEvents = iao.Player;
+
+            playerEvents.OnMoveActionEvent -= OnMove;
+            playerEvents.OnJumpActionEvent -= OnJump;
         }
 
-            if (groundedHandler.IsGrounded)
-                velocity.y = -0.2f; // Default grounded falling speed (should be small but negative to "stick" to the ground)
-        }
         private void Update()
         {
             Vector3 direction = Vector3.ClampMagnitude(root.right * moveInput.x + root.forward * moveInput.y, 1f);
 
-            Vector3 moveMotion = direction * speed * Time.deltaTime;
+            Vector3 moveMotion = speed * Time.deltaTime * direction;
             Vector3 velocityMotion = velocity * Time.deltaTime;
 
             Vector3 netMotion = moveMotion + velocityMotion;
@@ -62,25 +54,16 @@ namespace com.alexlopezvega.prototype
         private void FixedUpdate()
         {
             velocity += Physics.gravity * Time.fixedDeltaTime;
-        }
 
-        private void Jump()
-        {
-            IPlayerEvents events = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
-
-            events.OnMoveActionEvent += OnMove;
-            events.OnJumpActionEvent += OnJump;
-        }
-
-        private void OnMoveAction(CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
-        private void OnJumpAction(CallbackContext ctx)
-        {
-            if (AssetFinder.TryFindComponent(TagCts.InputActionsObserver, out InputActionsObserver iao))
+            if (groundedHandler.IsGrounded)
             {
-                IPlayerEvents events = iao.Player;
-
-                events.OnMoveActionEvent -= OnMove;
-                events.OnJumpActionEvent -= OnJump;
+                if (queueJump)
+                {
+                    queueJump = false;
+                    velocity.y = Mathf.Sqrt(2f * -Physics.gravity.y * jumpHeight);
+                }
+                else
+                    velocity.y = GroundedFallSpeed;
             }
         }
 
@@ -90,13 +73,9 @@ namespace com.alexlopezvega.prototype
         }
         private void OnJump(CallbackContext ctx)
         {
-            if(ctx.performed)
-                jumpInput = true;
+            if (ctx.performed)
+                queueJump = true;
         }
-
-        // Structs
-
-        // Classes
 
     }
 }

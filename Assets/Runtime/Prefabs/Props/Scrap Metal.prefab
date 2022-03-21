@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 4880004122658250664}
   - component: {fileID: 356048762521496667}
   - component: {fileID: 7055526554237993217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Interaction Volume
-  m_TagString: Untagged
+  m_TagString: Prop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
