@@ -11,7 +11,7 @@ namespace com.alexlopezvega.prototype.ui
         [SerializeField] private DragImage dragHandler = default;
         [SerializeField] private Image image = default;
         [field: Header("Data")]
-        [field: SerializeField] public Item Item { get; private set; }
+        [field: SerializeField] public ItemStack ItemStack { get; private set; }
 
         private void Start() => UpdateImageSprite();
 
@@ -46,18 +46,24 @@ namespace com.alexlopezvega.prototype.ui
 
             ItemSlot itemSlot = eventData.pointerDrag.GetComponent<ItemSlot>();
 
-            if (itemSlot.Item == null)
+            if (itemSlot.ItemStack == null)
                 return;
 
             itemSlot.SwapItem(this);
         }
 
+        public void SetItemStack(ItemStack itemStack)
+        {
+            ItemStack = itemStack;
+            UpdateImageSprite();
+        }
+
         private void SwapItem(ItemSlot newItemSlot)
         {
-            Item temp = Item;
+            ItemStack temp = ItemStack;
 
-            this.Item = newItemSlot.Item;
-            newItemSlot.Item = temp;
+            this.ItemStack = newItemSlot.ItemStack;
+            newItemSlot.ItemStack = temp;
 
             this.UpdateImageSprite();
             newItemSlot.UpdateImageSprite();
@@ -72,7 +78,7 @@ namespace com.alexlopezvega.prototype.ui
 
         private void UpdateImageSprite()
         {
-            if (Item == null)
+            if (ItemStack == null || ItemStack.Item == null)
             {
                 SetImageAlpha(0f);
                 image.sprite = null;
@@ -80,7 +86,7 @@ namespace com.alexlopezvega.prototype.ui
             else
             {
                 SetImageAlpha(1f);
-                image.sprite = Item.Sprite;
+                image.sprite = ItemStack.Item.Sprite;
             }
         }
     }

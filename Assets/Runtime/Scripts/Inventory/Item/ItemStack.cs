@@ -1,15 +1,22 @@
+using UnityEngine;
+
 namespace com.alexlopezvega.prototype.inventory
 {
     [System.Serializable]
     public class ItemStack
     {
-        public Item item;
-        public uint amount;
+        [field: SerializeField] public Item Item { get; set; }
+        [field: SerializeField] public uint Amount { get; set; }
 
         public ItemStack(Item item, uint amount)
         {
-            this.item = item;
-            this.amount = amount;
+            Item = item;
+            Amount = amount;
+        }
+
+        public ItemStack() : this(default, default)
+        {
+
         }
     }
 }

@@ -66,7 +66,7 @@ namespace com.alexlopezvega.prototype.ui
 
             TMPUGUI tmpText = inputTextClone.GetComponent<TMPUGUI>();
 
-            tmpText.text = $"{itemStack.amount} x {itemStack.item.Name}";
+            tmpText.text = $"{itemStack.Amount} x {itemStack.Item.Name}";
             tmpText.color = hasEnoughInput ? Color.white : Color.red;
         }
 
@@ -120,7 +120,7 @@ namespace com.alexlopezvega.prototype.ui
             }
 
             // Item
-            Item item = recipe.Output.item;
+            Item item = recipe.Output.Item;
 
             outputItemIconImage.sprite = item.Sprite;
             outputItemNameText.text = item.name;

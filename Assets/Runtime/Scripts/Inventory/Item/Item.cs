@@ -7,5 +7,6 @@ namespace com.alexlopezvega.prototype.inventory
     {
         [field: SerializeField] public string Name { get; private set; } // Name of the item, not the ScriptableObject
         [field: SerializeField] public Sprite Sprite { get; private set; }
+        [field: SerializeField] public uint Weight { get; private set; }
     }
 }

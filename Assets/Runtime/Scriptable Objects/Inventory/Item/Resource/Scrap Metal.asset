@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Scrap Metal
   <Sprite>k__BackingField: {fileID: 21300000, guid: b1e067c11ccf0314d98df94f6ecdf46d, type: 3}
+  <Weight>k__BackingField: 1

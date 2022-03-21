@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
@@ -8,13 +9,15 @@ namespace com.alexlopezvega.prototype
 
         // Fields
         [Header("Dependencies")]
+        [SerializeField] private Transform root = default;
         [SerializeField] private CharacterController characterController = default;
         [Header("Data")]
-        [SerializeField] private MovementSystemTypes defaultMovementSystem = default;
-        [SerializeField] private WalkMovementSystem walkMovementSystem = default;
-        [SerializeField] private SwimMovementSystem swimMovementSystem = default;
+        [SerializeField] private float speed = default;
 
-        private MovementSystem activeMovementSystem = default;
+        private Vector2 moveInput = default;
+        private bool jumpInput = default;
+
+        private Vector3 velocity = default;
 
         // Constructors
 
@@ -29,27 +32,12 @@ namespace com.alexlopezvega.prototype
         // Interfaces (interface implementations)
 
         // Properties
-        private MovementSystem Active
-        {
-            get => activeMovementSystem;
-            set
-            {
-                if (Active == value)
-                    return;
-
-                SetAllEnabled(false);
-
-                activeMovementSystem = value;
-                activeMovementSystem.Enabled = true;
-            }
-        }
 
         // Indexers
 
         // Methods
         private void Start()
         {
-            SetDefaultMovementSystem();
             SubscribeMovementSystemsToPlayerEvents();
         }
 
@@ -60,37 +48,27 @@ namespace com.alexlopezvega.prototype
 
         private void Update()
         {
+            Vector3 direction = Vector3.ClampMagnitude(root.right * moveInput.x + root.forward * moveInput.y, 1f);
 
-            activeMovementSystem.OnUpdate(
-                characterController,
-                Time.deltaTime);
+            Vector3 moveMotion = direction * speed * Time.deltaTime;
+            Vector3 velocityMotion = velocity * Time.deltaTime;
+
+            Vector3 netMotion = moveMotion + velocityMotion;
+
+            characterController.Move(netMotion);
         }
 
-        private void SetAllEnabled(bool state)
+        private void FixedUpdate()
         {
-            walkMovementSystem.Enabled = state;
-            swimMovementSystem.Enabled = state;
-        }
-
-        private void SetDefaultMovementSystem()
-        {
-            switch (defaultMovementSystem)
-            {
-                case MovementSystemTypes.Walk:
-                    Active = walkMovementSystem;
-                    break;
-                case MovementSystemTypes.Swim:
-                    Active = swimMovementSystem;
-                    break;
-            }
+            velocity += Physics.gravity * Time.fixedDeltaTime;
         }
 
         private void SubscribeMovementSystemsToPlayerEvents()
         {
             IPlayerEvents events = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
 
-            walkMovementSystem.SubscribeToEvents(events);
-            swimMovementSystem.SubscribeToEvents(events);
+            events.OnMoveActionEvent += OnMove;
+            events.OnJumpActionEvent += OnJump;
         }
 
         private void TryUnsubscribeMovementSystemsFromPlayerEvents()
@@ -99,18 +77,24 @@ namespace com.alexlopezvega.prototype
             {
                 IPlayerEvents events = iao.Player;
 
-                walkMovementSystem.UnsubscribeFromEvents(events);
-                swimMovementSystem.UnsubscribeFromEvents(events);
+                events.OnMoveActionEvent -= OnMove;
+                events.OnJumpActionEvent -= OnJump;
             }
+        }
+
+        private void OnMove(CallbackContext ctx)
+        {
+            moveInput = ctx.ReadValue<Vector2>();
+        }
+        private void OnJump(CallbackContext ctx)
+        {
+            if(ctx.performed)
+                jumpInput = true;
         }
 
         // Structs
 
         // Classes
-        public enum MovementSystemTypes
-        {
-            Walk,
-            Swim
-        }
+
     }
 }

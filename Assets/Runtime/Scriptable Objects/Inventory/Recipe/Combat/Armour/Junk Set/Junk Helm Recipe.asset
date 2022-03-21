@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Junk Helm Recipe
   m_EditorClassIdentifier: 
   <Inputs>k__BackingField:
-  - item: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
-    amount: 5
+  - <Item>k__BackingField: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+    <Amount>k__BackingField: 5
   <Output>k__BackingField:
-    item: {fileID: 11400000, guid: 61d23564e5228074f8804c7ba584a553, type: 2}
-    amount: 1
+    <Item>k__BackingField: {fileID: 11400000, guid: 61d23564e5228074f8804c7ba584a553, type: 2}
+    <Amount>k__BackingField: 1

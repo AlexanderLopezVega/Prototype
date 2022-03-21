@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Junk Mail Recipe
   m_EditorClassIdentifier: 
   <Inputs>k__BackingField:
-  - item: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
-    amount: 15
+  - <Item>k__BackingField: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+    <Amount>k__BackingField: 10
   <Output>k__BackingField:
-    item: {fileID: 11400000, guid: d26e3677ee9c5bd48b7a269cc9c52229, type: 2}
-    amount: 1
+    <Item>k__BackingField: {fileID: 11400000, guid: d26e3677ee9c5bd48b7a269cc9c52229, type: 2}
+    <Amount>k__BackingField: 1

@@ -727,3 +727,64 @@ MonoBehaviour:
   steerControl:
     outputMaximum: 15
     deltaRate: 15
+--- !u!1001 &2821927232911896262
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985252, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821927231021985255, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: m_Name
+      value: Scrap Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309621861167421559, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}
+      propertyPath: inventoryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51c13d95066c42d4d92e85a344cb3c19, type: 3}

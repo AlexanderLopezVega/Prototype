@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - InputActionsObserver
+  - Prop
   layers:
   - Default
   - TransparentFX

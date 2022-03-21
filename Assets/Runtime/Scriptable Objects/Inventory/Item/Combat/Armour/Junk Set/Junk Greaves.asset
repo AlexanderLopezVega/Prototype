@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Junk Greaves
   <Sprite>k__BackingField: {fileID: 21300000, guid: b5c1174ecb988634bbdf7ac5e2d14263, type: 3}
+  <Weight>k__BackingField: 4

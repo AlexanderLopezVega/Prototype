@@ -1,4 +1,3 @@
-using com.alexlopezvega.prototype.ui;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +6,10 @@ namespace com.alexlopezvega.prototype.inventory
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] private uint capacity = default;
-        [SerializeField] private List<Item> items = default;
+        [SerializeField] private uint maximumWeight = default;
 
         private Dictionary<Item, ItemStack> itemStackSet = default;
+        private uint currentWeight = default;
 
         // Observers
         private ISet<IInventoryObserver> observerSet = default;
@@ -19,71 +18,54 @@ namespace com.alexlopezvega.prototype.inventory
         {
             itemStackSet = new Dictionary<Item, ItemStack>();
             observerSet = new HashSet<IInventoryObserver>();
-
-            foreach (Item item in items)
-                AddItem(item, 1);
         }
 
-        public bool AddItem(Item item, uint amount)
+        public void AddItem(Item item, uint amount)
         {
-            uint previousAmount = 0;
-            uint currentAmount = 0;
+            ItemStack itemStack = itemStackSet.Emplace(item);
 
-            if (!itemStackSet.ContainsKey(item))
-            {
-                if (!HasRemainingCapacity())
-                    return false;
-                else
-                    itemStackSet[item] = new ItemStack(item, amount);
-            }
-            else
-            {
-                previousAmount = itemStackSet[item].amount;
-                itemStackSet[item].amount += amount;
-            }
+            uint previousAmount = itemStack.Amount;
+            itemStack.Amount += amount;
+            uint currentAmount = itemStack.Amount;
 
-            currentAmount = itemStackSet[item].amount;
+            currentWeight += item.Weight * amount;
 
-            NotifyObservers(observer => observer.OnItemAdded(item, previousAmount, currentAmount));
-
-            return true;
+            NotifyObservers(observer => observer.OnItemAdded(item, previousAmount, 0));
         }
 
-        public bool AddItem(ItemStack itemStack) => AddItem(itemStack.item, itemStack.amount);
+        public void AddItem(ItemStack itemStack) => AddItem(itemStack.Item, itemStack.Amount);
 
         public uint RemoveItem(Item item, uint amount)
         {
-            if (!itemStackSet.ContainsKey(item))
+            if (!itemStackSet.TryGetValue(item, out ItemStack value))
                 return 0;
 
-            uint previousAmount = itemStackSet[item].amount;
-            uint currentAmount = 0;
+            uint remainder = (value.Amount <= amount) ? 0 : value.Amount - amount;
 
-            if (previousAmount <= amount)
+            uint previousAmount = value.Amount;
+            value.Amount = remainder;
+            uint currentAmount = value.Amount;
+
+            if (value.Amount == 0)
                 itemStackSet.Remove(item);
-            else
-            {
-                itemStackSet[item].amount -= amount;
 
-                currentAmount = itemStackSet[item].amount;
-            }
+            currentWeight -= item.Weight * (previousAmount - currentAmount);
 
             NotifyObservers(observer => observer.OnItemRemoved(item, previousAmount, currentAmount));
 
             return previousAmount - currentAmount;
         }
 
-        public uint RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.item, itemStack.amount);
+        public uint RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.Item, itemStack.Amount);
 
-        public ItemStack GetStack(Item item) => !itemStackSet.ContainsKey(item) ? default : itemStackSet[item];
+        public ItemStack GetStack(Item item) => !itemStackSet.TryGetValue(item, out ItemStack stack) ? default : stack;
 
-        public bool HasEnough(Item item, uint amount) => itemStackSet.ContainsKey(item) && itemStackSet[item].amount >= amount;
-        public bool HasEnough(ItemStack itemStack) => HasEnough(itemStack.item, itemStack.amount);
+        public bool HasEnough(Item item, uint amount) => itemStackSet.TryGetValue(item, out ItemStack stack) && stack.Amount >= amount;
+        public bool HasEnough(ItemStack itemStack) => HasEnough(itemStack.Item, itemStack.Amount);
 
-        private bool HasRemainingCapacity() => itemStackSet.Keys.Count < capacity;
+        public bool HasRemainingWeight() => currentWeight < maximumWeight;
 
         // Observer
-
         public void AddObserver(IInventoryObserver observer)
         {
             if (observer == null)

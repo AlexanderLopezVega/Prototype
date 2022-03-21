@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Junk Helm
   <Sprite>k__BackingField: {fileID: 21300000, guid: ed21a03f7c26b194f9224784ee60ce79, type: 3}
+  <Weight>k__BackingField: 2
