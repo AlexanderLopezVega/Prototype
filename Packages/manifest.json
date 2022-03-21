@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "com.alexlopezvega.multiscene": "https://github.com/AlexanderLopezVega/Multiscene.git",
+    "com.alexlopezvega.scriptable-object-data": "https://github.com/AlexanderLopezVega/ScriptableObjectData.git",
+    "com.marijnzwemmer.unity-toolbar-extender": "https://github.com/marijnz/unity-toolbar-extender.git",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.cinemachine": "2.6.11",
     "com.unity.collab-proxy": "1.15.12",
     "com.unity.ide.rider": "2.0.7",

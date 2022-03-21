@@ -4,6 +4,7 @@ namespace com.alexlopezvega.prototype
     {
         // Constant Fields
         public const string InputActionsObserver = nameof(InputActionsObserver);
+        public const string Player = nameof(Player);
 
         // Fields
 

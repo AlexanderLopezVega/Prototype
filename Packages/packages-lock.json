@@ -1,5 +1,32 @@
 {
   "dependencies": {
+    "com.alexlopezvega.multiscene": {
+      "version": "https://github.com/AlexanderLopezVega/Multiscene.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d5b8ea56b3ed3696d960d24495880c2cb1cf4857"
+    },
+    "com.alexlopezvega.scriptable-object-data": {
+      "version": "https://github.com/AlexanderLopezVega/ScriptableObjectData.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3206f7021459fd9b495b7a063ac76728e414b6be"
+    },
+    "com.marijnzwemmer.unity-toolbar-extender": {
+      "version": "https://github.com/marijnz/unity-toolbar-extender.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "df8031d46275ab1e0efc1225c33f58cda2f74872"
+    },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.cinemachine": {
       "version": "2.6.11",
       "depth": 0,

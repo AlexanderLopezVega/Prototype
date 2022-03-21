@@ -18,7 +18,7 @@ namespace com.alexlopezvega.prototype
         // Events
         public event Action<CallbackContext> OnMoveActionEvent;
         public event Action<CallbackContext> OnJumpActionEvent;
-        public event Action<CallbackContext> OnAutorunEvent;
+        public event Action<CallbackContext> OnLookActionEvent;
 
         // Enums
 
