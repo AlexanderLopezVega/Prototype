@@ -64,6 +64,24 @@ namespace com.alexlopezvega.prototype
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toggle Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""b85a3631-d8d0-487c-95e1-408323435193"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toggle Crafting"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cfd16c3-7b8c-4c2e-8067-d10722313067"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ namespace com.alexlopezvega.prototype
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d848721c-b6bb-4763-8eb7-652cd09aed96"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Toggle Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b794d127-5c33-46bb-9602-90d4b8adcc32"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Toggle Crafting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -295,6 +335,8 @@ namespace com.alexlopezvega.prototype
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_ToggleInventory = m_Player.FindAction("Toggle Inventory", throwIfNotFound: true);
+            m_Player_ToggleCrafting = m_Player.FindAction("Toggle Crafting", throwIfNotFound: true);
             // Vehicle
             m_Vehicle = asset.FindActionMap("Vehicle", throwIfNotFound: true);
             m_Vehicle_Throttle = m_Vehicle.FindAction("Throttle", throwIfNotFound: true);
@@ -363,6 +405,8 @@ namespace com.alexlopezvega.prototype
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_ToggleInventory;
+        private readonly InputAction m_Player_ToggleCrafting;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
@@ -371,6 +415,8 @@ namespace com.alexlopezvega.prototype
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+            public InputAction @ToggleCrafting => m_Wrapper.m_Player_ToggleCrafting;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -392,6 +438,12 @@ namespace com.alexlopezvega.prototype
                     @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                     @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                    @ToggleInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                    @ToggleInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                    @ToggleInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                    @ToggleCrafting.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCrafting;
+                    @ToggleCrafting.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCrafting;
+                    @ToggleCrafting.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCrafting;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -408,6 +460,12 @@ namespace com.alexlopezvega.prototype
                     @Interact.started += instance.OnInteract;
                     @Interact.performed += instance.OnInteract;
                     @Interact.canceled += instance.OnInteract;
+                    @ToggleInventory.started += instance.OnToggleInventory;
+                    @ToggleInventory.performed += instance.OnToggleInventory;
+                    @ToggleInventory.canceled += instance.OnToggleInventory;
+                    @ToggleCrafting.started += instance.OnToggleCrafting;
+                    @ToggleCrafting.performed += instance.OnToggleCrafting;
+                    @ToggleCrafting.canceled += instance.OnToggleCrafting;
                 }
             }
         }
@@ -476,6 +534,8 @@ namespace com.alexlopezvega.prototype
             void OnJump(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnToggleInventory(InputAction.CallbackContext context);
+            void OnToggleCrafting(InputAction.CallbackContext context);
         }
         public interface IVehicleActions
         {

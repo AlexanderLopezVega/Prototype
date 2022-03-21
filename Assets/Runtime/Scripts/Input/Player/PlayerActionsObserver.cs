@@ -22,13 +22,19 @@ namespace com.alexlopezvega.prototype
         public event Action<CallbackContext> OnLookActionEvent;
         public event Action<CallbackContext> OnInteractActionEvent;
 
+        public event Action<CallbackContext> OnToggleInventoryActionEvent;
+        public event Action<CallbackContext> OnToggleCraftingActionEvent;
+
         // Enums
 
         // Interfaces (interface implementations)
-        public void OnMove(CallbackContext context) => OnMoveActionEvent?.Invoke(context);
-        public void OnJump(CallbackContext context) => OnJumpActionEvent?.Invoke(context);
-        public void OnLook(CallbackContext context) => OnLookActionEvent?.Invoke(context);
-        public void OnInteract(CallbackContext context) => OnInteractActionEvent?.Invoke(context);
+        void IPlayerActions.OnMove(CallbackContext context) => OnMoveActionEvent?.Invoke(context);
+        void IPlayerActions.OnJump(CallbackContext context) => OnJumpActionEvent?.Invoke(context);
+        void IPlayerActions.OnLook(CallbackContext context) => OnLookActionEvent?.Invoke(context);
+        void IPlayerActions.OnInteract(CallbackContext context) => OnInteractActionEvent?.Invoke(context);
+
+        void IPlayerActions.OnToggleInventory(CallbackContext context) => OnToggleInventoryActionEvent?.Invoke(context);
+        void IPlayerActions.OnToggleCrafting(CallbackContext context) => OnToggleCraftingActionEvent?.Invoke(context);
 
         // Properties
 

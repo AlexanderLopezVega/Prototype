@@ -21,6 +21,9 @@ namespace com.alexlopezvega.prototype
         public event Action<CallbackContext> OnLookActionEvent;
         public event Action<CallbackContext> OnInteractActionEvent;
 
+        public event Action<CallbackContext> OnToggleInventoryActionEvent;
+        public event Action<CallbackContext> OnToggleCraftingActionEvent;
+
         // Enums
 
         // Interfaces (interface implementations)
