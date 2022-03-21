@@ -46,9 +46,13 @@ namespace com.alexlopezvega.prototype.ui
             inventory.AddObserver(this);
         }
 
-        public void OnItemAdded(Item item, uint previousAmount, uint currentAmount) => OnInventoryChanged();
-        public void OnItemRemoved(Item item, uint previousAmount, uint currentAmount) => OnInventoryChanged();
-        public void OnRegister(Dictionary<Item, ItemStack> itemMap) { }
+        void IInventoryObserver.OnRegister(in Dictionary<Item, ItemStack> itemStackMap) { }
+        void IInventoryObserver.OnItemAdded(in Dictionary<Item, ItemStack> itemStackMap,
+                                            in ItemStack previousStack,
+                                            in ItemStack currentStack) => OnInventoryChanged();
+        void IInventoryObserver.OnItemRemoved(in Dictionary<Item, ItemStack> itemStackMap,
+                                              in ItemStack previousStack,
+                                              in ItemStack currentStack) => OnInventoryChanged();
 
         public void TryCraftRecipe()
         {

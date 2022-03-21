@@ -11,7 +11,7 @@ namespace com.alexlopezvega.prototype
 
         public void PickUp(Transform actorRoot)
         {
-            actorRoot.GetComponent<Inventory>().AddItem(inventoryItem, 1);
+            actorRoot.GetComponent<Inventory>().AddItem(inventoryItem, 11);
 
             Destroy(root.gameObject);
         }

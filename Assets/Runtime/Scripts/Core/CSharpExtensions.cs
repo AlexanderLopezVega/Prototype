@@ -4,11 +4,11 @@ namespace com.alexlopezvega.prototype
 {
     public static class CSharpExtensions
     {
-        public static U Emplace<T, U>(this Dictionary<T, U> map, T key) where U : new()
+        public static U Emplace<T, U>(this Dictionary<T, U> map, T key, U emplaceValue) where U : new()
         {
             if (!map.TryGetValue(key, out U value))
             {
-                value = new U();
+                value = emplaceValue;
                 map.Add(key, value);
             }
 

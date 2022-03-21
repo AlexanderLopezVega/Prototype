@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &90516920 stripped
@@ -320,6 +324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &108175122 stripped
@@ -719,6 +727,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &188202147 stripped
@@ -1221,6 +1233,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &553090140 stripped
@@ -1323,6 +1339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &606195581 stripped
@@ -2145,6 +2165,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &861479568 stripped
@@ -2695,6 +2719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1050878885 stripped
@@ -3216,6 +3244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1216696807 stripped
@@ -3318,6 +3350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1240357175 stripped
@@ -3554,6 +3590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1323312925 stripped
@@ -3656,6 +3696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1346337982 stripped
@@ -4419,6 +4463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1736021715 stripped
@@ -4521,6 +4569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1753135759 stripped
@@ -4623,6 +4675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &1760228498 stripped
@@ -5278,6 +5334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &2027926191 stripped
@@ -5598,6 +5658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Slot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7618194400161436471, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
+      propertyPath: dragHandler
+      value: 
+      objectReference: {fileID: 1468454181}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f9d160e25ca5b4283dd25d41e8985b, type: 3}
 --- !u!224 &2105375619 stripped

@@ -13,10 +13,7 @@ namespace com.alexlopezvega.prototype.inventory
             Item = item;
             Amount = amount;
         }
-
-        public ItemStack() : this(default, default)
-        {
-
-        }
+        public ItemStack() : this(default, default) { }
+        public ItemStack(ItemStack other): this(other.Item, other.Amount) { }
     }
 }

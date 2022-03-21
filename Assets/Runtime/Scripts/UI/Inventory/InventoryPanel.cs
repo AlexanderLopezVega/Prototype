@@ -1,6 +1,5 @@
 using com.alexlopezvega.prototype.inventory;
 using Multiscene.Runtime;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,9 @@ namespace com.alexlopezvega.prototype.ui
         [SerializeField] private RectTransform panelRoot = default;
 
         private Inventory inventory = default;
+
         private List<ItemSlot> itemSlotList = default;
+        private Dictionary<Item, ItemStack> itemStackMap = default;
 
         public void OnSceneCollectionLoaded()
         {
@@ -22,19 +23,14 @@ namespace com.alexlopezvega.prototype.ui
             inventory.AddObserver(this);
         }
 
-        public void OnItemAdded(Item item, uint previousAmount, uint currentAmount)
-        {
-            Debug.Log($"{currentAmount - previousAmount} x {item.Name} added!");
-        }
+        public void OnRegister(in Dictionary<Item, ItemStack> itemStackMap) => UpdateUI(itemStackMap.Values);
+        public void OnItemAdded(in Dictionary<Item, ItemStack> itemMap, in ItemStack previousStack, in ItemStack currentStack) => UpdateUI(itemMap.Values);
+        public void OnItemRemoved(in Dictionary<Item, ItemStack> itemMap, in ItemStack previousStack, in ItemStack currentStack) => UpdateUI(itemMap.Values);
 
-        public void OnItemRemoved(Item item, uint previousAmount, uint currentAmount)
+        private void ClearItemStacks()
         {
-
-        }
-
-        public void OnRegister(Dictionary<Item, ItemStack> itemMap)
-        {
-            FillItems(itemMap.Values);
+            foreach (var itemSlot in itemSlotList)
+                itemSlot.ItemStack = null;
         }
 
         private void FetchAllItemSlots()
@@ -47,10 +43,35 @@ namespace com.alexlopezvega.prototype.ui
 
         private void FillItems(IEnumerable<ItemStack> stacks)
         {
-            int i = 0;
+            int index = 0;
+            IEnumerator<ItemStack> itemStackEnumerator = stacks.GetEnumerator();
+            bool existsRemainingInventoryStacks;
 
-            foreach(var itemStack in stacks)
-                itemSlotList[i++].SetItemStack(itemStack);
+            CheckRemainingInventoryStacks();
+
+            while(index < itemSlotList.Count && existsRemainingInventoryStacks)
+            {
+                ItemSlot itemSlot = itemSlotList[index];
+
+                if (itemSlot.ItemStack == null)
+                {
+                    itemSlot.ItemStack = itemStackEnumerator.Current;
+                    CheckRemainingInventoryStacks();
+                }
+
+                ++index;
+            }
+
+            void CheckRemainingInventoryStacks()
+            {
+                existsRemainingInventoryStacks = itemStackEnumerator.MoveNext();
+            }
+        }
+
+        private void UpdateUI(in IEnumerable<ItemStack> itemStacks)
+        {
+            ClearItemStacks();
+            FillItems(itemStacks);
         }
     }
 }

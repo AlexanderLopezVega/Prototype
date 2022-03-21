@@ -10,8 +10,19 @@ namespace com.alexlopezvega.prototype.ui
         [Header("Dependencies")]
         [SerializeField] private DragImage dragHandler = default;
         [SerializeField] private Image image = default;
-        [field: Header("Data")]
-        [field: SerializeField] public ItemStack ItemStack { get; private set; }
+
+        private ItemStack itemStack = default;
+
+        public ItemStack ItemStack
+        {
+            get => itemStack;
+            set
+            {
+                itemStack = value;
+
+                UpdateImageSprite();
+            }
+        }
 
         private void Start() => UpdateImageSprite();
 
@@ -50,12 +61,6 @@ namespace com.alexlopezvega.prototype.ui
                 return;
 
             itemSlot.SwapItem(this);
-        }
-
-        public void SetItemStack(ItemStack itemStack)
-        {
-            ItemStack = itemStack;
-            UpdateImageSprite();
         }
 
         private void SwapItem(ItemSlot newItemSlot)

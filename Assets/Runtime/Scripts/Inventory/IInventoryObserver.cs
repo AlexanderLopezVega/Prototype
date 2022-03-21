@@ -4,8 +4,8 @@ namespace com.alexlopezvega.prototype.inventory
 {
     public interface IInventoryObserver
     {
-        void OnRegister(Dictionary<Item, ItemStack> itemMap);
-        void OnItemAdded(Item item, uint previousAmount, uint currentAmount);
-        void OnItemRemoved(Item item, uint previousAmount, uint currentAmount);
+        void OnRegister(in Dictionary<Item, ItemStack> itemStackMap);
+        void OnItemAdded(in Dictionary<Item, ItemStack> itemStackMap, in ItemStack previousStack, in ItemStack currentStack);
+        void OnItemRemoved(in Dictionary<Item, ItemStack> itemStackMap, in ItemStack previousStack, in ItemStack currentStack);
     }
 }

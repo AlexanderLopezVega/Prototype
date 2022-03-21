@@ -8,59 +8,55 @@ namespace com.alexlopezvega.prototype.inventory
     {
         [SerializeField] private uint maximumWeight = default;
 
-        private Dictionary<Item, ItemStack> itemStackSet = default;
-        private uint currentWeight = default;
+        private Dictionary<Item, ItemStack> itemStackMap = default;
+        private float currentWeight = default;
 
         // Observers
         private ISet<IInventoryObserver> observerSet = default;
 
         public void Awake()
         {
-            itemStackSet = new Dictionary<Item, ItemStack>();
+            itemStackMap = new Dictionary<Item, ItemStack>();
             observerSet = new HashSet<IInventoryObserver>();
         }
 
         public void AddItem(Item item, uint amount)
         {
-            ItemStack itemStack = itemStackSet.Emplace(item);
+            ItemStack currentItemStack = itemStackMap.Emplace(item, new ItemStack() { Item = item, Amount = 0 });
+            ItemStack previousItemStack = new ItemStack(currentItemStack);
 
-            uint previousAmount = itemStack.Amount;
-            itemStack.Amount += amount;
-            uint currentAmount = itemStack.Amount;
-
+            currentItemStack.Amount += amount;
             currentWeight += item.Weight * amount;
 
-            NotifyObservers(observer => observer.OnItemAdded(item, previousAmount, currentAmount));
+            NotifyObservers(observer => observer.OnItemAdded(itemStackMap, previousItemStack, currentItemStack));
         }
 
         public void AddItem(ItemStack itemStack) => AddItem(itemStack.Item, itemStack.Amount);
 
         public uint RemoveItem(Item item, uint amount)
         {
-            if (!itemStackSet.TryGetValue(item, out ItemStack value))
+            if (!itemStackMap.TryGetValue(item, out ItemStack currentItemStack))
                 return 0;
 
-            uint remainder = (value.Amount <= amount) ? 0 : value.Amount - amount;
+            ItemStack previousItemStack = new ItemStack(currentItemStack);
 
-            uint previousAmount = value.Amount;
-            value.Amount = remainder;
-            uint currentAmount = value.Amount;
+            uint remainder = (currentItemStack.Amount <= amount) ? 0 : currentItemStack.Amount - amount;
 
-            if (value.Amount == 0)
-                itemStackSet.Remove(item);
+            if ((currentItemStack.Amount = remainder) == 0)
+                itemStackMap.Remove(item);
 
-            currentWeight -= item.Weight * (previousAmount - currentAmount);
+            currentWeight -= item.Weight * (previousItemStack.Amount - currentItemStack.Amount);
 
-            NotifyObservers(observer => observer.OnItemRemoved(item, previousAmount, currentAmount));
+            NotifyObservers(observer => observer.OnItemRemoved(itemStackMap, previousItemStack, currentItemStack));
 
-            return previousAmount - currentAmount;
+            return previousItemStack.Amount - currentItemStack.Amount;
         }
 
         public uint RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.Item, itemStack.Amount);
 
-        public ItemStack GetStack(Item item) => !itemStackSet.TryGetValue(item, out ItemStack stack) ? default : stack;
+        public ItemStack GetStack(Item item) => !itemStackMap.TryGetValue(item, out ItemStack stack) ? default : stack;
 
-        public bool HasEnough(Item item, uint amount) => itemStackSet.TryGetValue(item, out ItemStack stack) && stack.Amount >= amount;
+        public bool HasEnough(Item item, uint amount) => itemStackMap.TryGetValue(item, out ItemStack stack) && stack.Amount >= amount;
         public bool HasEnough(ItemStack itemStack) => HasEnough(itemStack.Item, itemStack.Amount);
 
         public bool HasRemainingWeight() => currentWeight < maximumWeight;
@@ -72,7 +68,7 @@ namespace com.alexlopezvega.prototype.inventory
                 return;
 
             observerSet.Add(observer);
-            observer.OnRegister(itemStackSet);
+            observer.OnRegister(itemStackMap);
         }
         public void RemoveObserver(IInventoryObserver observer)
         {
