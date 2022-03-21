@@ -5,7 +5,7 @@ namespace com.alexlopezvega.prototype
         // Constant Fields
         public const string InputActionsObserver = nameof(InputActionsObserver);
         public const string Player = nameof(Player);
-        public const string UIEffects = nameof(UIEffects);
+        public const string PlayerUI = nameof(PlayerUI);
 
         // Fields
 

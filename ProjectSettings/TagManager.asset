@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InputActionsObserver
   - Prop
+  - PlayerUI
   layers:
   - Default
   - TransparentFX
