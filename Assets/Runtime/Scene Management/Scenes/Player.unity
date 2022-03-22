@@ -133,11 +133,10 @@ GameObject:
   m_Component:
   - component: {fileID: 82262846}
   - component: {fileID: 82262845}
-  - component: {fileID: 82262847}
   - component: {fileID: 82262848}
   m_Layer: 0
   m_Name: CM Player Camera
-  m_TagString: Untagged
+  m_TagString: PlayerCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,21 +259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &82262847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82262844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerIndex: -1
-  XYAxis: {fileID: 1807417363329525164, guid: 3d3f287e921ef0447aa0859b104ee0a0, type: 3}
-  ZAxis: {fileID: 0}
 --- !u!114 &82262848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4ea335cbbf1684883a7f44a5d06fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputProvider: {fileID: 82262847}
+  PlayerIndex: -1
+  XYAxis: {fileID: 0}
+  ZAxis: {fileID: 0}
+  storedLookAction: {fileID: 1807417363329525164, guid: 3d3f287e921ef0447aa0859b104ee0a0, type: 3}
 --- !u!1 &116693715
 GameObject:
   m_ObjectHideFlags: 3

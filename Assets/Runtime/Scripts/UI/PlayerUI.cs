@@ -11,11 +11,11 @@ namespace com.alexlopezvega.prototype
         [SerializeField] private RectTransform inventoryRoot = default;
         [SerializeField] private RectTransform craftingRoot = default;
 
-        public event Action OnAllPanelsDisabledEvent = default;
-        public event Action OnAnyPanelEnabledEvent = default;
+        private CinemachineInputProviderExtended inputProvider = default;
 
         void IBootListener.OnSceneCollectionLoaded()
         {
+            inputProvider = AssetFinder.FindComponent<CinemachineInputProviderExtended>(TagCts.PlayerCamera);
             IPlayerEvents player = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
 
             player.OnToggleInventoryActionEvent += OnToggleInventoryAction;
@@ -41,7 +41,7 @@ namespace com.alexlopezvega.prototype
                 if (craftingRoot.gameObject.activeSelf)
                     ToggleCrafting();
 
-                CheckEvents();
+                CheckEnableCameraInput();
             }
         }
 
@@ -54,19 +54,19 @@ namespace com.alexlopezvega.prototype
                 if (!inventoryRoot.gameObject.activeSelf)
                     ToggleInventory();
 
-                CheckEvents();
+                CheckEnableCameraInput();
             }
         }
 
-        private void CheckEvents()
+        private void CheckEnableCameraInput()
         {
             bool craftingEnabled = craftingRoot.gameObject.activeSelf;
             bool inventoryEnabled = inventoryRoot.gameObject.activeSelf;
 
             if (!(craftingEnabled || inventoryEnabled))
-                OnAllPanelsDisabledEvent?.Invoke();
+                inputProvider.SetInputEnabled(true);
             else
-                OnAnyPanelEnabledEvent?.Invoke();
+                inputProvider.SetInputEnabled(false);
         }
 
         private void ToggleCrafting()

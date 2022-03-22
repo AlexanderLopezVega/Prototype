@@ -53,7 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragHandler: {fileID: 0}
   image: {fileID: 7618194401332460965}
-  <Item>k__BackingField: {fileID: 0}
 --- !u!222 &7618194400161436464
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -75,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19, g: 0.192, b: 0.2, a: 0.29803923}
+  m_Color: {r: 0.19, g: 0.192, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
