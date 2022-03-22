@@ -195,8 +195,8 @@ MonoBehaviour:
       m_LegacyHeadingDefinition: -1
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
-    m_enabled: 0
-    m_WaitTime: 1
+    m_enabled: 1
+    m_WaitTime: 5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.653337, z: -5.674981}
+  m_FollowOffset: {x: 0, y: 0.7221305, z: -4.442278}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.653337, z: -5.674981}
+  m_FollowOffset: {x: 0, y: 0.7221305, z: -4.442278}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: maximumWeight
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 8913677568144290827, guid: 1ebdf5e36a1b9224a9d50501a9af3f13, type: 3}
+      propertyPath: cameraRoot
+      value: 
+      objectReference: {fileID: 82262846}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ebdf5e36a1b9224a9d50501a9af3f13, type: 3}
 --- !u!4 &1414670616 stripped
@@ -819,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.653337, z: -5.674981}
+  m_FollowOffset: {x: 0, y: 0.7221305, z: -4.442278}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
