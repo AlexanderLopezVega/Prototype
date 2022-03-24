@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 1696770153244897777}
   - component: {fileID: 2777228821567264134}
   m_Layer: 5
-  m_Name: List Foldout Toggle
+  m_Name: List Foldout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
