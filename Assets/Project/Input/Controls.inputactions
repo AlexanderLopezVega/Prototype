@@ -152,7 +152,7 @@
                 {
                     "name": "",
                     "id": "d848721c-b6bb-4763-8eb7-652cd09aed96",
-                    "path": "<Keyboard>/f1",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -163,7 +163,7 @@
                 {
                     "name": "",
                     "id": "b794d127-5c33-46bb-9602-90d4b8adcc32",
-                    "path": "<Keyboard>/f2",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",

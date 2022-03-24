@@ -10,5 +10,6 @@ namespace com.alexlopezvega.prototype
 
         public const string Item = Inventory + Delimiter + nameof(Item);
         public const string Recipe = Inventory + Delimiter + nameof(Recipe);
+        public const string Category = Inventory + Delimiter + nameof(Category);
     }
 }
