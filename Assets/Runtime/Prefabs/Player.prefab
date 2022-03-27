@@ -102,6 +102,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRoot: {fileID: 1169519024334691808}
   cameraRoot: {fileID: 0}
+  inputActionsObserverTag:
+    UseConstant: 0
+    ConstantValue: 
+    Variable: {fileID: 11400000, guid: b8810602d47b3fa4c8ecb46884700d0a, type: 2}
 --- !u!114 &9071449790543410746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +121,10 @@ MonoBehaviour:
   root: {fileID: 1169519024334691808}
   characterController: {fileID: 1169519024334691814}
   groundedHandler: {fileID: 7174502925415343603}
+  inputActionsObserverTag:
+    UseConstant: 0
+    ConstantValue: 
+    Variable: {fileID: 11400000, guid: b8810602d47b3fa4c8ecb46884700d0a, type: 2}
   speed: 2
   jumpHeight: 0.5
 --- !u!114 &3354374277948160666
@@ -133,6 +141,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actorRoot: {fileID: 1169519024334691808}
   interactionSource: {fileID: 2492926448579287077}
+  inputActionsObserverTag:
+    UseConstant: 0
+    ConstantValue: 
+    Variable: {fileID: 11400000, guid: b8810602d47b3fa4c8ecb46884700d0a, type: 2}
   interactionRadius: 2
   interactionMask:
     serializedVersion: 2

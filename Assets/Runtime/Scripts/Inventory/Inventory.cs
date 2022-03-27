@@ -7,9 +7,13 @@ namespace com.alexlopezvega.prototype.inventory
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private uint maximumWeight = default;
+        [SerializeField] private uint maximumVolume = default;
 
         private Dictionary<Item, ItemStack> itemStackMap = default;
+        private ISet<Recipe> recipeSet = default;
+
         private float currentWeight = default;
+        private float currentVolume = default;
 
         // Observers
         private ISet<IInventoryObserver> observerSet = default;
@@ -17,9 +21,12 @@ namespace com.alexlopezvega.prototype.inventory
         public void Awake()
         {
             itemStackMap = new Dictionary<Item, ItemStack>();
+            recipeSet = new HashSet<Recipe>();
+
             observerSet = new HashSet<IInventoryObserver>();
         }
 
+        #region Items
         public void AddItem(Item item, uint amount)
         {
             ItemStack currentItemStack = itemStackMap.Emplace(item, new ItemStack() { Item = item, Amount = 0 });
@@ -61,14 +68,38 @@ namespace com.alexlopezvega.prototype.inventory
 
         public bool HasRemainingWeight() => currentWeight < maximumWeight;
 
-        // Observer
+        #endregion
+        #region Recipe
+        public bool AddRecipe(Recipe recipe)
+        {
+            bool recipeAdded = (recipe != null) && recipeSet.Add(recipe);
+
+            if (recipeAdded)
+                NotifyObservers(observer => observer.OnRecipeAdded(recipeSet, recipe));
+
+            return recipeAdded;
+        }
+
+        public bool RemoveRecipe(Recipe recipe)
+        {
+            bool recipeRemoved = (recipe != null) && recipeSet.Remove(recipe);
+
+            if (recipeRemoved)
+                NotifyObservers(observer => observer.OnRecipeRemoved(recipeSet, recipe));
+
+            return recipeRemoved;
+        }
+
+        public bool HasRecipe(Recipe recipe) => recipeSet.Contains(recipe);
+        #endregion
+        #region Observer
         public void AddObserver(IInventoryObserver observer)
         {
             if (observer == null)
                 return;
 
             observerSet.Add(observer);
-            observer.OnRegister(itemStackMap);
+            observer.OnRegister(itemStackMap, recipeSet);
         }
         public void RemoveObserver(IInventoryObserver observer)
         {
@@ -83,5 +114,6 @@ namespace com.alexlopezvega.prototype.inventory
             foreach (var observer in observerSet)
                 observerAction(observer);
         }
+        #endregion
     }
 }

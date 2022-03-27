@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e247860f52b517349b9b5067d8699f1a, type: 3}
+  m_Name: 1 - Mafumofu Head
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Mafumofu Hood
+  <Description>k__BackingField: Special product of Pokke. The intense cold of the
+    mountains is not a problem.
+  <Category>k__BackingField: {fileID: 11400000, guid: 7dc3151d965a12a4b920faca27090545, type: 2}
+  <Icon>k__BackingField: {fileID: 21300000, guid: ed21a03f7c26b194f9224784ee60ce79, type: 3}
+  <Weight>k__BackingField: 2.25
+  <Volume>k__BackingField: 10.5

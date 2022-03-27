@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d979d777e22c248970273a26c83d87, type: 3}
+  m_Script: {fileID: 11500000, guid: c3cacbe9f4f3f034ea4553efb042e777, type: 3}
   m_Name: Armour
   m_EditorClassIdentifier: 
-  Value: 
+  <Name>k__BackingField:
+    UseConstant: 1
+    ConstantValue: Armour
+    Variable: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: d933b80d04b32cb469c31f00d25331d5, type: 3}

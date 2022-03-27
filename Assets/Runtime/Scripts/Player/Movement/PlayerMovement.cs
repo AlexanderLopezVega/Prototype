@@ -1,4 +1,5 @@
 using Multiscene.Runtime;
+using ScriptableObjectData.Runtime.SOData;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -12,6 +13,8 @@ namespace com.alexlopezvega.prototype
         [SerializeField] private Transform root = default;
         [SerializeField] private CharacterController characterController = default;
         [SerializeField] private GroundedHandler groundedHandler = default;
+        [Space]
+        [SerializeField] private StringReference inputActionsObserverTag = default;
         [Header("Data")]
         [SerializeField, Min(0f)] private float speed = default;
         [SerializeField, Min(0f)] private float jumpHeight = default;
@@ -23,14 +26,14 @@ namespace com.alexlopezvega.prototype
 
         void IBootListener.OnSceneCollectionLoaded()
         {
-            IPlayerEvents playerEvents = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
+            IPlayerEvents playerEvents = AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag).Player;
 
             playerEvents.OnMoveActionEvent += OnMove;
             playerEvents.OnJumpActionEvent += OnJump;
         }
         private void OnDestroy()
         {
-            if (!AssetFinder.TryFindComponent(TagCts.InputActionsObserver, out InputActionsObserver iao))
+            if (!AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver iao))
                 return;
 
             IPlayerEvents playerEvents = iao.Player;

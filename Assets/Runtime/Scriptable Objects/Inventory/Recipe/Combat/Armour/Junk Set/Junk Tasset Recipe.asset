@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953a551fe7a7210408c3ede0819bbd1f, type: 3}
   m_Name: Junk Tasset Recipe
   m_EditorClassIdentifier: 
-  <Inputs>k__BackingField:
+  <RequiredTools>k__BackingField: []
+  <Materials>k__BackingField:
   - <Item>k__BackingField: {fileID: 11400000, guid: 27a28caf3784cf2478264816ee00249d, type: 2}
-    <Amount>k__BackingField: 7
+    <Amount>k__BackingField: 6
   <Output>k__BackingField:
     <Item>k__BackingField: {fileID: 11400000, guid: d0a08f5846fbae640b3194caa2d364ab, type: 2}
     <Amount>k__BackingField: 1

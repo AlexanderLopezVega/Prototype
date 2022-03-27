@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace com.alexlopezvega.prototype
@@ -14,5 +15,7 @@ namespace com.alexlopezvega.prototype
 
             return value;
         }
+
+        public static bool ContainsIgnoreCase(this string str, string other) => str?.IndexOf(other, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

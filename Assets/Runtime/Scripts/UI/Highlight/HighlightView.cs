@@ -1,44 +1,34 @@
-using TMPro;
+using com.alexlopezvega.prototype.inventory;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace com.alexlopezvega.prototype.ui
 {
-    using TMPUGUI = TextMeshProUGUI;
-
     public class HighlightView : MonoBehaviour
     {
         [Header("Dependencies")]
-        [SerializeField] private TMPUGUI nameText = default;
-        [SerializeField] private TMPUGUI descriptionText = default;
-        [SerializeField] private Image icon = default;
-        [SerializeField] private RectTransform detailsRoot = default;
+        [SerializeField] private GameObject highlightWindowRoot = default;
+        [Space]
+        [SerializeField] private ItemHighlight itemRenderer = default;
+        [SerializeField] private RecipeHighlight recipeRenderer = default;
 
-        private HighlightRenderer highlightRenderer = default;
+        public void RenderItem(Item item)
+        {
+            highlightWindowRoot.SetActive(true);
 
-        public string Name
-        {
-            set => nameText.text = value;
-        }
-        public string Description
-        {
-            set => descriptionText.text = value;
-        }
-        public Sprite Sprite
-        {
-            set => icon.sprite = value;
-        }
-        public RectTransform DetailsRoot => detailsRoot;
+            itemRenderer.SetActive(true);
+            recipeRenderer.SetActive(false);
 
-        public HighlightRenderer HighlightRenderer
+            itemRenderer.SetHighlight(item);
+        }
+        public void RenderRecipe(Recipe recipe)
         {
-            get => highlightRenderer;
-            set
-            {
-                highlightRenderer.OnRenderingStop(this);
-                highlightRenderer = value;
-                highlightRenderer.OnRenderingStart(this);
-            }
+            highlightWindowRoot.SetActive(true);
+
+            itemRenderer.SetActive(true);
+            itemRenderer.SetActive(true);
+
+            itemRenderer.SetHighlight(recipe.Output.Item);
+            recipeRenderer.SetHighlight(recipe);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Multiscene.Runtime;
+using ScriptableObjectData.Runtime.SOData;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -9,15 +10,22 @@ namespace com.alexlopezvega.prototype
         [Header("Dependencies")]
         [SerializeField] private Transform actorRoot = default;
         [SerializeField] private Transform interactionSource = default;
+        [Space]
+        [SerializeField] private StringReference inputActionsObserverTag = default;
         [Header("Data")]
         [SerializeField, Min(0f)] private float interactionRadius = default;
         [SerializeField] private LayerMask interactionMask = default;
 
         void IBootListener.OnSceneCollectionLoaded()
         {
-            IPlayerEvents playerEvents = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver).Player;
+            AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag).Player.OnInteractActionEvent += OnInteract;
+        }
+        private void OnDestroy()
+        {
+            if (!AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver iao))
+                return;
 
-            playerEvents.OnInteractActionEvent += OnInteract;
+            iao.Player.OnInteractActionEvent -= OnInteract;
         }
 
         public void TryInteract()

@@ -1,3 +1,4 @@
+using ScriptableObjectData.Runtime.SOData;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
@@ -13,6 +14,8 @@ namespace com.alexlopezvega.prototype.vehicle
         [SerializeField] private Rigidbody vehicleRigidbody = default;
         [SerializeField] private List<WheelCollider> motorWheels = default;
         [SerializeField] private List<WheelCollider> steerWheels = default;
+        [Space]
+        [SerializeField] private StringReference inputActionsObserverTag = default;
         [Header("Data")]
         [SerializeField] private Vector3 localCentreOfMass = default;
         [Header("Motor")]
@@ -37,7 +40,7 @@ namespace com.alexlopezvega.prototype.vehicle
 
         private void Start()
         {
-            InputActionsObserver inputActionsObserver = AssetFinder.FindComponent<InputActionsObserver>(TagCts.InputActionsObserver);
+            InputActionsObserver inputActionsObserver = AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag);
 
             inputActionsObserver.Vehicle.OnThrottleActionEvent += OnThrottleAction;
             inputActionsObserver.Vehicle.OnSteerActionEvent += OnSteerAction;
@@ -47,7 +50,7 @@ namespace com.alexlopezvega.prototype.vehicle
         }
         private void OnDestroy()
         {
-            if (AssetFinder.TryFindComponent(TagCts.InputActionsObserver, out InputActionsObserver inputActionsObserver))
+            if (AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver inputActionsObserver))
             {
                 inputActionsObserver.Vehicle.OnThrottleActionEvent -= OnThrottleAction;
                 inputActionsObserver.Vehicle.OnSteerActionEvent -= OnSteerAction;

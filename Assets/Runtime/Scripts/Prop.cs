@@ -7,11 +7,11 @@ namespace com.alexlopezvega.prototype
     {
         [Header("Dependencies")]
         [SerializeField] private Transform root = default;
-        [SerializeField] private Item inventoryItem = default;
+        [SerializeField] private Item item = default;
 
         public void PickUp(Transform actorRoot)
         {
-            actorRoot.GetComponent<Inventory>().AddItem(inventoryItem, 11);
+            actorRoot.GetComponent<Inventory>().AddItem(item, 1);
 
             Destroy(root.gameObject);
         }
