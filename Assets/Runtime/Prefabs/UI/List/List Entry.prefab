@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 553155793980427368}
   - component: {fileID: 553155793980427371}
   - component: {fileID: 5164519501583186767}
-  - component: {fileID: 1579592239103997454}
+  - component: {fileID: 1809866812205553930}
   m_Layer: 5
-  m_Name: List Entry - Item Stack
+  m_Name: List Entry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1579592239103997454
+--- !u!114 &1809866812205553930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,12 +162,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 553155793980427372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8876cd758f9c5a744bd188a94fa7e898, type: 3}
+  m_Script: {fileID: 11500000, guid: 81bffc698adc0aa419f159e40531d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 553155795029591556}
+  categoryContainer: {fileID: 1098884076184317050}
   amountText: {fileID: 2672038474741698244}
-  iconImage: {fileID: 5554297157904802049}
 --- !u!1 &553155795029591558
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Item name
+  m_text: Entry name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 553155795779557113}
   - component: {fileID: 553155795779557110}
   m_Layer: 5
-  m_Name: Separator
+  m_Name: Flex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 600640696966334020}
   - component: {fileID: 3697483060792944267}
   m_Layer: 5
-  m_Name: Separator
+  m_Name: Flex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 8460880464172130881}
   - component: {fileID: 8583559870375416408}
   m_Layer: 5
-  m_Name: Separator
+  m_Name: Flex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 1845491718130550836}
   - component: {fileID: 9071898307638707317}
   m_Layer: 5
-  m_Name: Separator
+  m_Name: Flex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "999 \xD7"
+  m_text: 999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f19f47ce0072f24d8808abe037dd9ea, type: 2}
   m_sharedMaterial: {fileID: -9139843971482516163, guid: 8f19f47ce0072f24d8808abe037dd9ea, type: 2}

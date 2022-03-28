@@ -9,8 +9,7 @@ namespace com.alexlopezvega.prototype.ui
         [SerializeField] private RectTransform requiredToolsRoot = default;
         [SerializeField] private RectTransform ingredientsRoot = default;
         [Space]
-        [SerializeField] private GameObject requiredToolUIPrefab = default;
-        [SerializeField] private GameObject ingredientUIPrefab = default;
+        [SerializeField] private GameObject listEntryPrefab = default;
 
         public override void SetHighlight(Recipe recipe)
         {
@@ -26,24 +25,26 @@ namespace com.alexlopezvega.prototype.ui
 
         private void CreateIngredientUI(ItemStack ingredientStack)
         {
-            GameObject ingredientUIClone = Instantiate(ingredientUIPrefab, ingredientsRoot, false);
+            GameObject listEntryClone = Instantiate(listEntryPrefab, ingredientsRoot, false);
 
-            MaterialListEntry ingredientUI = ingredientUIClone.GetComponent<MaterialListEntry>();
+            ListEntry ingredientUI = listEntryClone.GetComponent<ListEntry>();
 
             ingredientUI.Name = ingredientStack.Item.Name;
-            ingredientUI.CategoryIcon = ingredientStack.Item.Category.Icon;
-            ingredientUI.HeldAmount = 0; // TODO: Fetch stack amount in inventory of this ingredient item
-            ingredientUI.RequiredAmount = ingredientStack.Amount;
+            //ingredientUI.CategoryIcon = ingredientStack.Item.Category.Icon;
+            ingredientUI.Amount = 0; // TODO: Fetch stack amount in inventory of this ingredient item
+            ingredientUI.NecessaryAmount = ingredientStack.Amount;
         }
 
         private void CreateRequiredToolUI(Item requiredTool)
         {
-            GameObject requiredToolUIClone = Instantiate(requiredToolUIPrefab, requiredToolsRoot, false);
+            GameObject listEntryClone = Instantiate(listEntryPrefab, requiredToolsRoot, false);
 
-            RequiredToolListEntry requiredToolUI = requiredToolUIClone.GetComponent<RequiredToolListEntry>();
+            ListEntry listEntry = listEntryClone.GetComponent<ListEntry>();
 
-            requiredToolUI.Name = requiredTool.Name;
-            requiredToolUI.CategoryIcon = requiredTool.Category.Icon;
+            listEntry.Name = requiredTool.Name;
+            listEntry.Amount = 0;
+            listEntry.NecessaryAmount = 1;
+            //requiredToolUI.CategoryIcon = requiredTool.Category.Icon;
         }
     }
 }

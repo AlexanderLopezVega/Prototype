@@ -2489,8 +2489,7 @@ MonoBehaviour:
   highlightView: {fileID: 1722481834}
   itemsRoot: {fileID: 1518890629}
   recipesRoot: {fileID: 1565821163}
-  itemStackUIPrefab: {fileID: 553155793980427372, guid: 9075e93550889b74aaa5e23240d8e400, type: 3}
-  recipeUIPrefab: {fileID: 661905992520909312, guid: 2cdf4835f04c136439623293fe2b21de, type: 3}
+  listEntryPrefab: {fileID: 553155793980427372, guid: 3c1bd3e7bc18762409e79e943afa5c5f, type: 3}
 --- !u!1 &1147090062
 GameObject:
   m_ObjectHideFlags: 0
@@ -4060,8 +4059,7 @@ MonoBehaviour:
   root: {fileID: 1663805600290897895}
   requiredToolsRoot: {fileID: 1336968241}
   ingredientsRoot: {fileID: 1663805599666335784}
-  requiredToolUIPrefab: {fileID: 6837124104147422592, guid: 630f08ad4c0d44c41aa8d729c1964bc7, type: 3}
-  ingredientUIPrefab: {fileID: 553155793980427372, guid: 2ebd77c1d2d9f7b4dbd7116eb0c39498, type: 3}
+  listEntryPrefab: {fileID: 553155793980427372, guid: 3c1bd3e7bc18762409e79e943afa5c5f, type: 3}
 --- !u!114 &1416348835235422582
 MonoBehaviour:
   m_ObjectHideFlags: 0

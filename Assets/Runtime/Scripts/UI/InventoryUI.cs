@@ -16,8 +16,7 @@ namespace com.alexlopezvega.prototype.ui
         [SerializeField] private RectTransform itemsRoot = default;
         [SerializeField] private RectTransform recipesRoot = default;
         [Space]
-        [SerializeField] private GameObject itemStackUIPrefab = default;
-        [SerializeField] private GameObject recipeUIPrefab = default;
+        [SerializeField] private GameObject listEntryPrefab = default;
 
         void IBootListener.OnSceneCollectionLoaded()
         {
@@ -61,25 +60,24 @@ namespace com.alexlopezvega.prototype.ui
 
         private void CreateItemStackUI(ItemStack itemStack)
         {
-            GameObject itemStackUIClone = Instantiate(itemStackUIPrefab, itemsRoot, false);
+            GameObject listEntryClone = Instantiate(listEntryPrefab, itemsRoot, false);
+            ListEntry listEntry = listEntryClone.GetComponent<ListEntry>();
 
-            ItemStackListEntry itemStackUI = itemStackUIClone.GetComponent<ItemStackListEntry>();
+            listEntry.Name = itemStack.Item.Name;
+            //itemStackUI.CategoryIcon = itemStack.Item.Category.Icon;
+            listEntry.Amount = itemStack.Amount;
 
-            itemStackUI.Name = itemStack.Item.Name;
-            itemStackUI.CategoryIcon = itemStack.Item.Category.Icon;
-            itemStackUI.HeldAmount = itemStack.Amount;
-
-            itemStackUIClone.GetComponent<Button>().onClick.AddListener(() => highlightView.RenderItem(itemStack.Item));
+            listEntryClone.GetComponent<Button>().onClick.AddListener(() => highlightView.RenderItem(itemStack.Item));
         }
 
         private void CreateRecipeUI(Recipe recipe)
         {
-            GameObject recipeUIClone = Instantiate(recipeUIPrefab, itemsRoot, false);
+            GameObject listEntryClone = Instantiate(listEntryPrefab, recipesRoot, false);
 
-            RecipeListEntry recipeUI = recipeUIClone.GetComponent<RecipeListEntry>();
+            ListEntry recipeUI = listEntryClone.GetComponent<ListEntry>();
 
             recipeUI.Name = recipe.Output.Item.Name;
-            recipeUI.OutputIcon = recipe.Output.Item.Icon;
+            recipeUI.Amount = 1;
         }
 
         private void OnItemsUpdated(Dictionary<Item, ItemStack> itemStackMap)
