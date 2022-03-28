@@ -6,14 +6,7 @@ namespace com.alexlopezvega.prototype.inventory
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] private uint maximumWeight = default;
-        [SerializeField] private uint maximumVolume = default;
-
         private Dictionary<Item, ItemStack> itemStackMap = default;
-        private ISet<Recipe> recipeSet = default;
-
-        private float currentWeight = default;
-        private float currentVolume = default;
 
         // Observers
         private ISet<IInventoryObserver> observerSet = default;
@@ -21,7 +14,6 @@ namespace com.alexlopezvega.prototype.inventory
         public void Awake()
         {
             itemStackMap = new Dictionary<Item, ItemStack>();
-            recipeSet = new HashSet<Recipe>();
 
             observerSet = new HashSet<IInventoryObserver>();
         }
@@ -29,11 +21,10 @@ namespace com.alexlopezvega.prototype.inventory
         #region Items
         public void AddItem(Item item, uint amount)
         {
-            ItemStack currentItemStack = itemStackMap.Emplace(item, new ItemStack() { Item = item, Amount = 0 });
+            ItemStack currentItemStack = itemStackMap.Emplace(item, new ItemStack(item, 0));
             ItemStack previousItemStack = new ItemStack(currentItemStack);
 
             currentItemStack.Amount += amount;
-            currentWeight += item.Weight * amount;
 
             NotifyObservers(observer => observer.OnItemAdded(itemStackMap, previousItemStack, currentItemStack));
         }
@@ -47,12 +38,10 @@ namespace com.alexlopezvega.prototype.inventory
 
             ItemStack previousItemStack = new ItemStack(currentItemStack);
 
-            uint remainder = (currentItemStack.Amount <= amount) ? 0 : currentItemStack.Amount - amount;
+            uint remainder = currentItemStack.Amount > amount ? currentItemStack.Amount - amount : 0;
 
             if ((currentItemStack.Amount = remainder) == 0)
                 itemStackMap.Remove(item);
-
-            currentWeight -= item.Weight * (previousItemStack.Amount - currentItemStack.Amount);
 
             NotifyObservers(observer => observer.OnItemRemoved(itemStackMap, previousItemStack, currentItemStack));
 
@@ -66,31 +55,6 @@ namespace com.alexlopezvega.prototype.inventory
         public bool HasEnough(Item item, uint amount) => itemStackMap.TryGetValue(item, out ItemStack stack) && stack.Amount >= amount;
         public bool HasEnough(ItemStack itemStack) => HasEnough(itemStack.Item, itemStack.Amount);
 
-        public bool HasRemainingWeight() => currentWeight < maximumWeight;
-
-        #endregion
-        #region Recipe
-        public bool AddRecipe(Recipe recipe)
-        {
-            bool recipeAdded = (recipe != null) && recipeSet.Add(recipe);
-
-            if (recipeAdded)
-                NotifyObservers(observer => observer.OnRecipeAdded(recipeSet, recipe));
-
-            return recipeAdded;
-        }
-
-        public bool RemoveRecipe(Recipe recipe)
-        {
-            bool recipeRemoved = (recipe != null) && recipeSet.Remove(recipe);
-
-            if (recipeRemoved)
-                NotifyObservers(observer => observer.OnRecipeRemoved(recipeSet, recipe));
-
-            return recipeRemoved;
-        }
-
-        public bool HasRecipe(Recipe recipe) => recipeSet.Contains(recipe);
         #endregion
         #region Observer
         public void AddObserver(IInventoryObserver observer)
@@ -99,7 +63,7 @@ namespace com.alexlopezvega.prototype.inventory
                 return;
 
             observerSet.Add(observer);
-            observer.OnRegister(itemStackMap, recipeSet);
+            observer.OnRegister(itemStackMap);
         }
         public void RemoveObserver(IInventoryObserver observer)
         {
