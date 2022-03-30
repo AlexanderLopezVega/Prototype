@@ -1,6 +1,5 @@
-using ScriptableObjectData.Runtime.SOData;
-using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
@@ -10,22 +9,8 @@ namespace com.alexlopezvega.prototype
         [Header("Dependencies")]
         [SerializeField] private Transform playerRoot = default;
         [SerializeField] private Transform cameraRoot = default;
-        [Space]
-        [SerializeField] private StringReference inputActionsObserverTag = default;
 
         private bool shouldUpdateForward = default;
-
-        private void Start()
-        {
-            AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag).Player.OnMoveActionEvent += OnMoveAction;
-        }
-        private void OnDestroy()
-        {
-            if (!AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver iao))
-                return;
-
-            iao.Player.OnMoveActionEvent -= OnMoveAction; 
-        }
 
         private void Update()
         {
@@ -40,12 +25,9 @@ namespace com.alexlopezvega.prototype
             playerRoot.rotation = Quaternion.LookRotation(projCamToPlayer, Vector3.up);
         }
 
-        private void OnMoveAction(CallbackContext ctx)
+        public void OnMove(InputValue value)
         {
-            if (ctx.performed)
-                shouldUpdateForward = true;
-            else if(ctx.canceled)
-                shouldUpdateForward = false;
+            shouldUpdateForward = value.Get<Vector2>() != default;
         }
     }
 }

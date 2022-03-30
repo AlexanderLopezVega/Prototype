@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169519024334691808}
+  - component: {fileID: 5016657294873764600}
   - component: {fileID: 1169519024334691814}
   - component: {fileID: 8913677568144290827}
   - component: {fileID: 9071449790543410746}
@@ -71,6 +72,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5016657294873764600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169519024334691811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3d3f287e921ef0447aa0859b104ee0a0, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 523c679a-0d4f-4e06-8cbe-bd642657b1bb
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8addc00-c052-4ac0-8631-98e66f1d23de
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c66e737-a0a4-414e-af2c-7f947055197b
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43917e82-b9e9-4dae-8e5d-44acda212a55
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b85a3631-d8d0-487c-95e1-408323435193
+    m_ActionName: Player/Toggle Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9cfd16c3-7b8c-4c2e-8067-d10722313067
+    m_ActionName: Player/Toggle Crafting[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f9b4e59-34fb-444f-ad87-6262c746cb0f
+    m_ActionName: Vehicle/Throttle[/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dcdf1dac-43e1-4be3-af53-f39472bf89af
+    m_ActionName: Vehicle/Steering[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b793a22b-8d48-46b1-9c41-4e1c0778a257
+    m_ActionName: Vehicle/Autorun[/Keyboard/h]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!143 &1169519024334691814
 CharacterController:
   m_ObjectHideFlags: 0
@@ -176,8 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85b70b71925cd840914667ee96acef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumWeight: 50
-  maximumVolume: 0
 --- !u!114 &4555860000259580856
 MonoBehaviour:
   m_ObjectHideFlags: 0

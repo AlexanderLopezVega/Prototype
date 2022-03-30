@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace com.alexlopezvega.prototype
 {
@@ -16,5 +17,8 @@ namespace com.alexlopezvega.prototype
             foreach (Transform child in transform)
                 Object.Destroy(child.gameObject);
         }
+
+        // Input Value
+        public static bool HasValue<T>(this InputValue inputValue) where T : struct => !inputValue.Get<T>().Equals(default(T));
     }
 }

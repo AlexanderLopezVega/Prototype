@@ -1,11 +1,10 @@
-using Multiscene.Runtime;
-using ScriptableObjectData.Runtime.SOData;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
-    public class PlayerMovement : MonoBehaviour, IBootListener
+    public class PlayerMovement : MonoBehaviour
     {
         private const float GroundedFallSpeed = -0.2f;
 
@@ -13,8 +12,6 @@ namespace com.alexlopezvega.prototype
         [SerializeField] private Transform root = default;
         [SerializeField] private CharacterController characterController = default;
         [SerializeField] private GroundedHandler groundedHandler = default;
-        [Space]
-        [SerializeField] private StringReference inputActionsObserverTag = default;
         [Header("Data")]
         [SerializeField, Min(0f)] private float speed = default;
         [SerializeField, Min(0f)] private float jumpHeight = default;
@@ -23,24 +20,6 @@ namespace com.alexlopezvega.prototype
 
         private Vector3 velocity = default;
         private bool queueJump = default;
-
-        void IBootListener.OnSceneCollectionLoaded()
-        {
-            IPlayerEvents playerEvents = AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag).Player;
-
-            playerEvents.OnMoveActionEvent += OnMove;
-            playerEvents.OnJumpActionEvent += OnJump;
-        }
-        private void OnDestroy()
-        {
-            if (!AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver iao))
-                return;
-
-            IPlayerEvents playerEvents = iao.Player;
-
-            playerEvents.OnMoveActionEvent -= OnMove;
-            playerEvents.OnJumpActionEvent -= OnJump;
-        }
 
         private void Update()
         {
@@ -70,13 +49,13 @@ namespace com.alexlopezvega.prototype
             }
         }
 
-        private void OnMove(CallbackContext ctx)
+        public void OnMove(InputValue inputValue)
         {
-            moveInput = ctx.ReadValue<Vector2>();
+            moveInput = inputValue.Get<Vector2>();
         }
-        private void OnJump(CallbackContext ctx)
+        public void OnJump(InputValue inputValue)
         {
-            if (ctx.performed)
+            if (inputValue.isPressed)
                 queueJump = true;
         }
 

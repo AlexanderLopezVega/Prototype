@@ -1,6 +1,7 @@
 using ScriptableObjectData.Runtime.SOData;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype.vehicle
@@ -14,8 +15,6 @@ namespace com.alexlopezvega.prototype.vehicle
         [SerializeField] private Rigidbody vehicleRigidbody = default;
         [SerializeField] private List<WheelCollider> motorWheels = default;
         [SerializeField] private List<WheelCollider> steerWheels = default;
-        [Space]
-        [SerializeField] private StringReference inputActionsObserverTag = default;
         [Header("Data")]
         [SerializeField] private Vector3 localCentreOfMass = default;
         [Header("Motor")]
@@ -35,26 +34,6 @@ namespace com.alexlopezvega.prototype.vehicle
                 autorun = value;
 
                 OnAutorunChanged(value);
-            }
-        }
-
-        private void Start()
-        {
-            InputActionsObserver inputActionsObserver = AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag);
-
-            inputActionsObserver.Vehicle.OnThrottleActionEvent += OnThrottleAction;
-            inputActionsObserver.Vehicle.OnSteerActionEvent += OnSteerAction;
-            inputActionsObserver.Vehicle.OnAutorunActionEvent += OnAutorunAction;
-
-            UpdateCentreOfMass();
-        }
-        private void OnDestroy()
-        {
-            if (AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver inputActionsObserver))
-            {
-                inputActionsObserver.Vehicle.OnThrottleActionEvent -= OnThrottleAction;
-                inputActionsObserver.Vehicle.OnSteerActionEvent -= OnSteerAction;
-                inputActionsObserver.Vehicle.OnAutorunActionEvent -= OnAutorunAction;
             }
         }
 
@@ -97,18 +76,18 @@ namespace com.alexlopezvega.prototype.vehicle
                 throttleControl.NormalisedTarget = throttleControl.NormalisedOutput;
         }
 
-        private void OnThrottleAction(CallbackContext context)
+        private void OnThrottle(InputValue inputValue)
         {
-            if (Autorun && context.canceled)
+            if (Autorun && inputValue.HasValue<float>())
                 return;
 
-            throttleControl.NormalisedTarget = context.ReadValue<float>();
+            throttleControl.NormalisedTarget = inputValue.Get<float>();
             Autorun = false;
         }
-        private void OnSteerAction(CallbackContext context) => steerControl.NormalisedTarget = context.ReadValue<float>();
-        private void OnAutorunAction(CallbackContext context)
+        private void OnSteer(InputValue inputValue) => steerControl.NormalisedTarget = inputValue.Get<float>();
+        private void OnAutorun(InputValue inputValue)
         {
-            if (context.performed)
+            if (inputValue.isPressed)
                 Autorun = !Autorun;
         }
 

@@ -1,32 +1,17 @@
-using Multiscene.Runtime;
-using ScriptableObjectData.Runtime.SOData;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace com.alexlopezvega.prototype
 {
-    public class InteractionHandler : MonoBehaviour, IBootListener
+    public class InteractionHandler : MonoBehaviour
     {
         [Header("Dependencies")]
         [SerializeField] private Transform actorRoot = default;
         [SerializeField] private Transform interactionSource = default;
-        [Space]
-        [SerializeField] private StringReference inputActionsObserverTag = default;
         [Header("Data")]
         [SerializeField, Min(0f)] private float interactionRadius = default;
         [SerializeField] private LayerMask interactionMask = default;
-
-        void IBootListener.OnSceneCollectionLoaded()
-        {
-            AssetFinder.FindComponent<InputActionsObserver>(inputActionsObserverTag).Player.OnInteractActionEvent += OnInteract;
-        }
-        private void OnDestroy()
-        {
-            if (!AssetFinder.TryFindComponent(inputActionsObserverTag, out InputActionsObserver iao))
-                return;
-
-            iao.Player.OnInteractActionEvent -= OnInteract;
-        }
 
         public void TryInteract()
         {
@@ -40,9 +25,9 @@ namespace com.alexlopezvega.prototype
                 }
         }
 
-        private void OnInteract(CallbackContext ctx)
+        public void OnInteract(InputValue inputValue)
         {
-            if (ctx.performed)
+            if (inputValue.isPressed)
                 TryInteract();
         }
 
